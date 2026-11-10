@@ -1,0 +1,6 @@
+# robots.txt for Fortesia Tech Innovation
+User-agent: *
+Allow: /
+
+Sitemap: https://fortesiatech.com/sitemap.xml
+
