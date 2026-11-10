@@ -102,10 +102,10 @@ export default function Header() {
             href="https://wa.me/6285129792711?text=Halo%20Fortesia%20Tech%20Innovation,%20saya%20ingin%20konsultasi%20mengenai%20proyek%20kami."
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-tactile hidden items-center gap-2 rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 px-5 py-2 text-xs font-bold text-white shadow-md shadow-indigo-500/20 transition-all hover:brightness-110 sm:inline-flex"
+            className="group btn-tactile hidden items-center gap-2 rounded-full bg-slate-950 px-4.5 py-2 text-xs font-semibold text-white shadow-sm transition-all hover:bg-slate-800 hover:shadow-md dark:bg-white dark:text-slate-950 dark:hover:bg-slate-100 dark:shadow-[0_0_20px_rgba(255,255,255,0.12)] sm:inline-flex"
           >
             <span>Konsultasi Gratis</span>
-            <ArrowRight className="h-3.5 w-3.5" />
+            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
           </a>
 
           {/* Mobile Hamburger Button */}
