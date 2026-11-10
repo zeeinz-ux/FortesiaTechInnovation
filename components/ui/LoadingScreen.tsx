@@ -21,6 +21,7 @@ export default function LoadingScreen() {
     }
 
     let animId: number;
+    let lastPaint = 0;
     const startTime = performance.now();
 
     // Fast, responsive loading progression (Snappy ~0.9s duration)
@@ -44,8 +45,12 @@ export default function LoadingScreen() {
         status = "SYSTEM READY";
       }
 
-      setProgress(Math.min(current, 100));
-      setStatusText(status);
+      // Throttle React updates: 60fps state updates are wasted work for a progress bar.
+      if (now - lastPaint >= 80 || elapsed >= 850) {
+        setProgress(Math.min(current, 100));
+        setStatusText(status);
+        lastPaint = now;
+      }
 
       if (elapsed < 850) {
         animId = requestAnimationFrame(tick);
@@ -89,7 +94,7 @@ export default function LoadingScreen() {
       <div className="text-center mb-8">
         <h1
           className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.2)]"
-          style={{ fontFamily: "'Playfair Display', serif" }}
+          style={{ fontFamily: "var(--font-serif)" }}
         >
           Fortesia
         </h1>

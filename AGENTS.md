@@ -28,8 +28,10 @@ npx tsc --noEmit            # the only reliable verification step
 - **Duplicated SEO copy**: metadata lives in `app/layout.tsx`; JSON-LD in `components/seo/JsonLd.tsx`. FAQ questions/answers exist in both `components/sections/FAQ.tsx` and `JsonLd.tsx` with different wording — update both. `public/sitemap.xml` and `public/robots.txt` are static files (no `app/sitemap.ts`).
 - **Contact details are hardcoded in ~8 files**: grep `6285129792711` / `fortesiatechinnovation@gmail.com` before changing them.
 - **No form backend**: the `CTABanner` contact form validates client-side then opens `wa.me` with the message prefilled. There is nothing to deploy server-side.
-- **`LoadingScreen` blocks the viewport with a scripted ~2s progress animation on every load** (it is not tied to real asset loading). Wait ~3s before screenshots or visual checks.
-- **`ThreeHeroCanvas`** is client-only three.js: 34k particles desktop / 12k mobile, mouse-repel physics disabled on mobile, animation paused when offscreen. Treat it as expensive and keep it out of SSR paths.
+- **`LoadingScreen`** covers the viewport with a scripted ~0.9s progress animation on every load (not tied to real asset loading). It is skipped entirely for Lighthouse/headless/reduced-motion. Wait ~1.5s before screenshots.
+- **`ThreeHeroCanvas`** is client-only three.js: 9k particles desktop / 4k mobile, capped at 30 FPS, physics disabled on mobile, and paused offscreen or on hidden tabs. On software WebGL (headless/Lighthouse/VMs) it renders one static frame instead of animating — keep that fallback, it is what keeps TBT near zero.
+- **Fonts** are self-hosted through `next/font` (`--font-inter` / `--font-playfair`). Use `var(--font-serif)` / `var(--font-sans)`; never re-add a Google Fonts `<link>` or `@import`, and avoid self-referencing theme vars (`--font-serif: var(--font-serif)`).
+- **`ScrollReveal`** is a lightweight IntersectionObserver + CSS transition. Do not reintroduce framer-motion; it added ~100 KiB to the client bundle.
 - **Deploy**: `.github/workflows/deploy.yml` uploads `./out` on push to `main`/`master`, but never sets `GITHUB_PAGES=true`, so the build won't produce `out/`. Set it in the workflow env when fixing Pages deploys.
 - `BLUEPRINT_RENCANA_LANDING_PAGE.md` is a gitignored local planning doc that predates the Next.js implementation (it describes a static `index.html` + vanilla JS). Trust the code over it.
 

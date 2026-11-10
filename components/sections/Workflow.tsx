@@ -40,7 +40,7 @@ export default function Workflow() {
           </div>
           <h2
             className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl dark:text-white"
-            style={{ fontFamily: "'Playfair Display', serif" }}
+            style={{ fontFamily: "var(--font-serif)" }}
           >
             4 Tahap Mudah Menuju Peluncuran
           </h2>

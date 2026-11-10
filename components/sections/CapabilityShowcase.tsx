@@ -97,7 +97,7 @@ export default function CapabilityShowcase() {
 
               <h2
                 className="mt-4 text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.08] tracking-tight text-slate-950 dark:text-white"
-                style={{ fontFamily: "'Playfair Display', serif" }}
+                style={{ fontFamily: "var(--font-serif)" }}
               >
                 Tools of
                 <br />
@@ -151,6 +151,7 @@ export default function CapabilityShowcase() {
                                 alt={skill.name}
                                 loading="lazy"
                                 decoding="async"
+                                fetchPriority="low"
                                 width="18"
                                 height="18"
                                 className="h-4.5 w-4.5 opacity-70 transition-opacity group-hover/pill:opacity-100 dark:invert"

@@ -8,7 +8,7 @@ export default function NotFound() {
       </p>
       <h1
         className="text-6xl sm:text-7xl font-bold mb-4"
-        style={{ fontFamily: "'Playfair Display', serif" }}
+        style={{ fontFamily: "var(--font-serif)" }}
       >
         Halaman Tidak Ditemukan
       </h1>

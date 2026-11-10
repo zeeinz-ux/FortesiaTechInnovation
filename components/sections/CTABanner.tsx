@@ -163,7 +163,7 @@ export default function CTABanner() {
             {/* Main Headline with Cycling Words (Gray to Purple) */}
             <h2
               className="text-5xl sm:text-6xl md:text-7xl font-bold leading-[1.05] tracking-tight text-slate-950 dark:text-white"
-              style={{ fontFamily: "'Playfair Display', serif" }}
+              style={{ fontFamily: "var(--font-serif)" }}
             >
               Let&apos;s Work
               <br />
