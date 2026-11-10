@@ -1,12 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function ThemeToggle() {
-  const [mounted, setMounted] = useState(false);
-
   useEffect(() => {
-    setMounted(true);
+    if (typeof window === "undefined") return;
     const media = window.matchMedia("(prefers-color-scheme: dark)");
     const handler = (e: MediaQueryListEvent) => {
       const stored = localStorage.getItem("theme");
@@ -21,8 +19,13 @@ export default function ThemeToggle() {
       }
     };
 
-    media.addEventListener("change", handler);
-    return () => media.removeEventListener("change", handler);
+    if (media.addEventListener) {
+      media.addEventListener("change", handler);
+      return () => media.removeEventListener("change", handler);
+    } else if ((media as any).addListener) {
+      (media as any).addListener(handler);
+      return () => (media as any).removeListener(handler);
+    }
   }, []);
 
   const toggleTheme = () => {

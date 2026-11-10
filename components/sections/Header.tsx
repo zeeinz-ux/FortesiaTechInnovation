@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import Container from "@/components/ui/Container";
 
