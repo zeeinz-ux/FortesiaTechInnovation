@@ -1,182 +1,175 @@
 "use client";
 
-import React, { useState } from "react";
-import { Check } from "lucide-react";
+import React from "react";
 import Container from "@/components/ui/Container";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
+interface TechSkill {
+  name: string;
+  icon: string;
+}
+
+interface TechCategory {
+  number: string;
+  name: string;
+  skills: TechSkill[];
+}
+
 export default function CapabilityShowcase() {
-  const [activeTab, setActiveTab] = useState<"performance" | "code" | "seo" | "mobile">("performance");
-
-  const tabData = {
-    performance: {
-      title: "Performa Kecepatan Akses (Real-Time Benchmark)",
-      speed: "0.38s",
-      score: "100/100",
-      uptime: "99.98%",
-      tech: "Lightweight",
-      heights: ["40%", "65%", "85%", "50%", "95%", "80%", "100%"],
+  const categories: TechCategory[] = [
+    {
+      number: "01",
+      name: "Frontend",
+      skills: [
+        { name: "Next.js 15", icon: "nextdotjs" },
+        { name: "React 19", icon: "react" },
+        { name: "TypeScript", icon: "typescript" },
+        { name: "Tailwind CSS", icon: "tailwindcss" },
+        { name: "JavaScript", icon: "javascript" },
+        { name: "HTML5", icon: "html5" },
+        { name: "CSS3", icon: "css" },
+        { name: "Bootstrap", icon: "bootstrap" },
+        { name: "Vite", icon: "vite" },
+      ],
     },
-    code: {
-      title: "Kualitas Arsitektur & Keamanan Kode Program",
-      speed: "A+ Grade",
-      score: "Clean Code",
-      uptime: "0 Vuln",
-      tech: "TypeScript",
-      heights: ["80%", "75%", "90%", "95%", "85%", "90%", "100%"],
+    {
+      number: "02",
+      name: "Backend",
+      skills: [
+        { name: "Node.js", icon: "nodedotjs" },
+        { name: "Python", icon: "python" },
+        { name: "FastAPI", icon: "fastapi" },
+        { name: "Laravel", icon: "laravel" },
+        { name: "Express", icon: "express" },
+        { name: "TypeScript", icon: "typescript" },
+        { name: "REST API", icon: "postman" },
+      ],
     },
-    seo: {
-      title: "Indeks Mesin Pencari & Google Core Web Vitals",
-      speed: "100% Pass",
-      score: "Top 1 Rank",
-      uptime: "Schema Ready",
-      tech: "Next.js SSG",
-      heights: ["60%", "70%", "80%", "90%", "85%", "95%", "100%"],
+    {
+      number: "03",
+      name: "Mobile",
+      skills: [
+        { name: "Flutter", icon: "flutter" },
+        { name: "Dart", icon: "dart" },
+        { name: "React Native", icon: "react" },
+        { name: "Android SDK", icon: "android" },
+        { name: "iOS Swift", icon: "swift" },
+        { name: "Firebase", icon: "firebase" },
+      ],
     },
-    mobile: {
-      title: "Respon Layar Seluler & Multi-Device Fluidity",
-      speed: "60 FPS",
-      score: "Fluid UI",
-      uptime: "100% Touch",
-      tech: "Responsive",
-      heights: ["95%", "90%", "85%", "100%", "90%", "95%", "100%"],
+    {
+      number: "04",
+      name: "Database",
+      skills: [
+        { name: "PostgreSQL", icon: "postgresql" },
+        { name: "Redis", icon: "redis" },
+        { name: "Supabase", icon: "supabase" },
+        { name: "MySQL", icon: "mysql" },
+        { name: "MongoDB", icon: "mongodb" },
+        { name: "Prisma", icon: "prisma" },
+      ],
     },
-  };
-
-  const current = tabData[activeTab];
+    {
+      number: "05",
+      name: "Cloud & DevOps",
+      skills: [
+        { name: "Docker", icon: "docker" },
+        { name: "Cloudflare", icon: "cloudflare" },
+        { name: "Vercel", icon: "vercel" },
+        { name: "AWS Cloud", icon: "amazonwebservices" },
+        { name: "Linux", icon: "linux" },
+        { name: "Git", icon: "git" },
+        { name: "GitHub", icon: "github" },
+      ],
+    },
+  ];
 
   return (
-    <section className="py-20 md:py-28" id="kapabilitas">
+    <section className="relative py-20 md:py-32 overflow-hidden" id="kapabilitas">
       <Container>
-        <ScrollReveal className="mx-auto max-w-3xl text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-4 py-1.5 text-xs font-semibold text-indigo-700 dark:border-purple-500/30 dark:bg-purple-500/15 dark:text-purple-300">
-            Transparansi Mutu Rekayasa
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
+          {/* Left Column: Sticky Header matching Image 3 */}
+          <div className="lg:w-5/12 lg:sticky lg:top-36">
+            <ScrollReveal direction="left">
+              <span className="text-xs font-bold tracking-[0.25em] text-indigo-600 dark:text-purple-400 uppercase">
+                CAPABILITIES
+              </span>
+
+              <h2
+                className="mt-4 text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.08] tracking-tight text-slate-950 dark:text-white"
+                style={{ fontFamily: "'Playfair Display', serif" }}
+              >
+                Tools of
+                <br />
+                the Trade.
+              </h2>
+
+              <p className="mt-6 text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 max-w-md">
+                Kombinasi teknologi modern dan arsitektur handal yang kami gunakan untuk membangun produk digital berkecepatan tinggi, aman, dan siap scale-up.
+              </p>
+
+              {/* Quick Trust Pill */}
+              <div className="mt-8 inline-flex items-center gap-3 rounded-full border border-slate-300 bg-white/80 px-4 py-2 text-xs font-bold text-slate-800 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
+                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>Standardized Production Stack</span>
+              </div>
+            </ScrollReveal>
           </div>
-          <h2
-            className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl dark:text-white"
-            style={{ fontFamily: "'Playfair Display', serif" }}
-          >
-            Kualitas Nyata yang Kami Bangun di Balik Layar
-          </h2>
-          <p className="mt-4 text-base text-slate-700 dark:text-slate-300">
-            Bukan sekadar tampilan luar yang rapi, setiap sistem yang kami serahkan harus lolos pengujian performa, keamanan, dan standar perayapan Google secara ketat.
-          </p>
-        </ScrollReveal>
 
-        {/* Dashboard Frame */}
-        <ScrollReveal delay={0.15}>
-          <div className="glass-panel mx-auto mt-12 max-w-5xl overflow-hidden rounded-2xl">
-            {/* Topbar with Tabs */}
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 px-6 py-4 dark:border-white/10">
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-bold tracking-wider text-slate-800 uppercase dark:text-white">
-                  SISTEM MONITORING MUTU
-                </span>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  Live Testing
-                </span>
-              </div>
-
-              {/* Tab Buttons */}
-              <div className="flex flex-wrap gap-1 rounded-full bg-slate-200/80 p-1 dark:bg-white/5">
-                {(
-                  [
-                    { key: "performance", label: "Performa & Kecepatan" },
-                    { key: "code", label: "Kualitas Kode" },
-                    { key: "seo", label: "Audit SEO" },
-                    { key: "mobile", label: "Multi-Device" },
-                  ] as const
-                ).map((tab) => (
-                  <button
-                    key={tab.key}
-                    type="button"
-                    onClick={() => setActiveTab(tab.key)}
-                    className={`rounded-full px-3 py-1 text-xs font-semibold transition-all ${
-                      activeTab === tab.key
-                        ? "bg-white text-indigo-700 shadow-sm dark:bg-purple-600 dark:text-white"
-                        : "text-slate-700 hover:text-slate-950 dark:text-slate-300 dark:hover:text-white"
-                    }`}
-                  >
-                    {tab.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Metrics 4 Columns */}
-            <div className="grid grid-cols-2 gap-4 border-b border-slate-200 p-6 sm:grid-cols-4 dark:border-white/10">
-              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-4 dark:border-white/5 dark:bg-white/[0.02]">
-                <div className="text-xs font-medium text-slate-600 dark:text-slate-400">Kecepatan Render (FCP)</div>
-                <div className="my-1 text-2xl font-black text-slate-950 dark:text-white">{current.speed}</div>
-                <div className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">Ultra Fast</div>
-              </div>
-
-              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-4 dark:border-white/5 dark:bg-white/[0.02]">
-                <div className="text-xs font-medium text-slate-600 dark:text-slate-400">Lighthouse Mutu</div>
-                <div className="my-1 text-2xl font-black text-slate-950 dark:text-white">{current.score}</div>
-                <div className="text-xs font-semibold text-indigo-600 dark:text-cyan-400">Max Standard</div>
-              </div>
-
-              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-4 dark:border-white/5 dark:bg-white/[0.02]">
-                <div className="text-xs font-medium text-slate-600 dark:text-slate-400">Stabilitas Uptime</div>
-                <div className="my-1 text-2xl font-black text-slate-950 dark:text-white">{current.uptime}</div>
-                <div className="text-xs font-semibold text-purple-600 dark:text-purple-400">High Reliability</div>
-              </div>
-
-              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-4 dark:border-white/5 dark:bg-white/[0.02]">
-                <div className="text-xs font-medium text-slate-600 dark:text-slate-400">Arsitektur Runtime</div>
-                <div className="my-1 text-2xl font-black text-slate-950 dark:text-white">{current.tech}</div>
-                <div className="text-xs font-semibold text-amber-600 dark:text-amber-400">Zero Bloat</div>
-              </div>
-            </div>
-
-            {/* Chart & Health Breakdown */}
-            <div className="grid grid-cols-1 gap-6 p-6 lg:grid-cols-3">
-              {/* Chart Column */}
-              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-5 lg:col-span-2 dark:border-white/5 dark:bg-black/20">
-                <div className="mb-4 flex items-center justify-between text-xs font-bold text-slate-800 dark:text-slate-200">
-                  <span>{current.title}</span>
-                  <span className="text-slate-500 dark:text-slate-400">Latency ms</span>
-                </div>
-
-                {/* Bar mockups */}
-                <div className="flex h-44 items-end gap-3 pt-4">
-                  {["Sen", "Sel", "Rab", "Kam", "Jum", "Sab", "Min"].map((day, idx) => (
-                    <div key={day} className="flex h-full flex-1 flex-col items-center justify-end gap-2">
-                      <div
-                        className="w-full rounded-t-md bg-gradient-to-t from-indigo-500/40 to-indigo-600 transition-all duration-700 dark:from-purple-600/30 dark:to-purple-500"
-                        style={{ height: current.heights[idx] }}
-                      />
-                      <span className="text-[10px] font-semibold text-slate-600 dark:text-slate-400">{day}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Health Checklist Column */}
-              <div className="flex flex-col justify-center gap-3">
-                {[
-                  { title: "Semantic HTML5 Markup", status: "100% Valid" },
-                  { title: "Responsive Viewport", status: "Mobile-First" },
-                  { title: "JSON-LD Schema Markup", status: "Google Rich" },
-                  { title: "Broken Assets Audit", status: "200 OK" },
-                ].map((item) => (
-                  <div
-                    key={item.title}
-                    className="flex items-center justify-between rounded-lg border border-slate-200/80 bg-slate-50/70 p-3 text-xs dark:border-white/5 dark:bg-white/[0.02]"
-                  >
-                    <div className="flex items-center gap-2 font-medium text-slate-800 dark:text-slate-200">
-                      <Check className="h-3.5 w-3.5 text-emerald-500" />
-                      <span>{item.title}</span>
-                    </div>
-                    <span className="font-bold text-indigo-600 dark:text-cyan-400">{item.status}</span>
+          {/* Right Column: Numbered Skill Categories with Right-to-Left Running Marquee */}
+          <div className="lg:w-7/12 w-full flex flex-col">
+            {categories.map((cat, idx) => (
+              <ScrollReveal key={cat.number} delay={idx * 0.08} direction="up">
+                <div className="group relative flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 border-t border-slate-200/90 py-8 dark:border-white/10">
+                  {/* Category Identifier */}
+                  <div className="flex sm:flex-col items-baseline sm:items-start gap-3 sm:gap-0 sm:w-40 shrink-0">
+                    <span className="text-3xl sm:text-4xl font-light text-slate-400 transition-colors group-hover:text-indigo-600 dark:text-white/25 dark:group-hover:text-purple-400">
+                      {cat.number}
+                    </span>
+                    <h3 className="text-lg sm:text-xl font-bold tracking-tight text-slate-950 dark:text-white">
+                      {cat.name}
+                    </h3>
                   </div>
-                ))}
-              </div>
-            </div>
+
+                  {/* Infinite Horizontal Running Marquee: RIGHT TO LEFT */}
+                  <div className="relative w-full overflow-hidden mask-marquee">
+                    {/* Gradient Fade Masks */}
+                    <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-[var(--bg-primary)] to-transparent" />
+                    <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-[var(--bg-primary)] to-transparent" />
+
+                    <div className="animate-marquee-rtl flex items-center gap-6 whitespace-nowrap py-1">
+                      {[...Array(2)].map((_, copyIndex) => (
+                        <div key={copyIndex} className="flex items-center gap-6 pr-6">
+                          {cat.skills.map((skill, sIdx) => (
+                            <div
+                              key={sIdx}
+                              className="group/pill inline-flex items-center gap-2.5 rounded-xl border border-slate-200/90 bg-white/80 px-4 py-2 text-sm font-semibold text-slate-800 shadow-sm transition-all hover:-translate-y-0.5 hover:border-indigo-400 hover:text-indigo-600 hover:shadow-md dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-200 dark:hover:border-purple-400 dark:hover:text-purple-300"
+                            >
+                              {/* SimpleIcon image with automatic dark/light mode query */}
+                              <img
+                                src={`https://cdn.simpleicons.org/${skill.icon}`}
+                                alt={skill.name}
+                                loading="lazy"
+                                width="18"
+                                height="18"
+                                className="h-4.5 w-4.5 opacity-70 transition-opacity group-hover/pill:opacity-100 dark:invert"
+                                onError={(e) => {
+                                  // Fallback gracefully if image fails to load
+                                  (e.target as HTMLElement).style.display = "none";
+                                }}
+                              />
+                              <span>{skill.name}</span>
+                            </div>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
           </div>
-        </ScrollReveal>
+        </div>
       </Container>
     </section>
   );
