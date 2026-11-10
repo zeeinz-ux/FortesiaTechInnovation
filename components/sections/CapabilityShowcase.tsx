@@ -145,20 +145,16 @@ export default function CapabilityShowcase() {
                               key={sIdx}
                               className="group/pill inline-flex items-center gap-2.5 rounded-xl border border-slate-200/90 bg-white/80 px-4 py-2 text-sm font-semibold text-slate-800 shadow-sm transition-all hover:-translate-y-0.5 hover:border-indigo-400 hover:text-indigo-600 hover:shadow-md dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-200 dark:hover:border-purple-400 dark:hover:text-purple-300"
                             >
-                              {/* SimpleIcon image with automatic dark/light mode query */}
+                              {/* Self-hosted brand icon: same origin, immutable 1-year cache */}
                               <img
-                                src={`https://cdn.simpleicons.org/${skill.icon}`}
-                                alt={skill.name}
+                                src={`/icons/tech/${skill.icon}.svg`}
+                                alt=""
+                                aria-hidden="true"
                                 loading="lazy"
                                 decoding="async"
-                                fetchPriority="low"
                                 width="18"
                                 height="18"
-                                className="h-4.5 w-4.5 opacity-70 transition-opacity group-hover/pill:opacity-100 dark:invert"
-                                onError={(e) => {
-                                  // Fallback gracefully if image fails to load
-                                  (e.target as HTMLElement).style.display = "none";
-                                }}
+                                className="h-4.5 w-4.5 shrink-0 opacity-70 transition-opacity group-hover/pill:opacity-100 dark:invert"
                               />
                               <span>{skill.name}</span>
                             </div>
