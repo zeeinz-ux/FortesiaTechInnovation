@@ -1,9 +1,78 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Send, Mail, CheckCircle2 } from "lucide-react";
 import Container from "@/components/ui/Container";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+
+const MARQUEE_ITEMS = [
+  "Available for Collaboration",
+  "Let's Build Something",
+  "Open for New Projects",
+  "High-Performance Web Engineering",
+  "Custom Mobile Applications",
+  "Scalable Digital Solutions",
+  "Contact Us Anytime",
+  "Direct Engineer Discussion",
+];
+
+const CYCLING_WORDS = [
+  "Together.",
+  "Boldly.",
+  "Creatively.",
+  "Scalably.",
+  "Seamlessly.",
+  "Greatly.",
+];
+
+function CyclingWord() {
+  const [index, setIndex] = useState(0);
+  const [visible, setVisible] = useState(true);
+  const [isPurple, setIsPurple] = useState(false);
+
+  useEffect(() => {
+    // When index changes, start in gray, then transition to purple
+    const purpleTimer = setTimeout(() => {
+      setIsPurple(true);
+    }, 350);
+
+    // After 2.3s, fade out
+    const fadeTimer = setTimeout(() => {
+      setVisible(false);
+    }, 2400);
+
+    // Advance to next word at 2.8s
+    const nextTimer = setTimeout(() => {
+      setIndex((prev) => (prev + 1) % CYCLING_WORDS.length);
+      setIsPurple(false);
+      setVisible(true);
+    }, 2800);
+
+    return () => {
+      clearTimeout(purpleTimer);
+      clearTimeout(fadeTimer);
+      clearTimeout(nextTimer);
+    };
+  }, [index]);
+
+  return (
+    <span
+      className={`inline-block transition-all duration-500 ease-out ${
+        isPurple
+          ? "text-indigo-600 dark:text-purple-400 drop-shadow-[0_0_20px_rgba(168,85,247,0.35)]"
+          : "text-slate-400 dark:text-zinc-500"
+      }`}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(12px)",
+        transition:
+          "opacity 0.35s cubic-bezier(0.16,1,0.3,1), transform 0.35s cubic-bezier(0.16,1,0.3,1), color 0.5s ease",
+      }}
+    >
+      {CYCLING_WORDS[index]}
+    </span>
+  );
+}
 
 export default function CTABanner() {
   const [name, setName] = useState("");
@@ -27,7 +96,7 @@ export default function CTABanner() {
     e.preventDefault();
     if (!validate()) return;
 
-    // Send formatted message directly to WhatsApp and mailto
+    // Send formatted message directly to WhatsApp
     const text = `Halo Fortesia Tech Innovation,\n\nNama: ${name}\nEmail: ${email}\nPesan: ${message}`;
     const waUrl = `https://wa.me/6285893861418?text=${encodeURIComponent(text)}`;
     window.open(waUrl, "_blank");
@@ -40,7 +109,40 @@ export default function CTABanner() {
   };
 
   return (
-    <section className="relative py-24 md:py-36 overflow-hidden" id="kontak">
+    <section className="relative pt-12 pb-24 md:pt-16 md:pb-36 overflow-hidden" id="kontak">
+      {/* Top Subtle Marquee Bar - Runs Relaxed & Slow from Right to Left */}
+      <div className="w-full overflow-hidden border-y border-slate-200/80 bg-white/40 py-3.5 mb-16 backdrop-blur-sm dark:border-white/[0.06] dark:bg-white/[0.01]">
+        <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0%,black_8%,black_92%,transparent_100%)]">
+          <div
+            className="animate-marquee-rtl flex items-center gap-10 whitespace-nowrap"
+            style={{ animationDuration: "36s" }}
+          >
+            {[...Array(2)].map((_, copyIndex) => (
+              <div key={copyIndex} className="flex items-center gap-10">
+                {MARQUEE_ITEMS.map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-10">
+                    <span className="text-[11px] font-bold tracking-[0.26em] text-slate-500 uppercase transition-colors hover:text-indigo-600 dark:text-zinc-500 dark:hover:text-purple-300">
+                      {item}
+                    </span>
+                    <span className="h-1.5 w-1.5 rounded-full bg-slate-300 dark:bg-white/20" />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Subtle Grid Overlay matching Top Hero */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-20 [mask-image:linear-gradient(to_bottom,transparent_0%,black_20%,black_80%,transparent_100%)]"
+        style={{
+          backgroundImage: `linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px)`,
+          backgroundSize: "60px 60px",
+        }}
+        aria-hidden="true"
+      />
+
       {/* Soft Ambient Spotlight in Center */}
       <div
         className="pointer-events-none absolute top-1/2 left-1/2 -z-10 h-[500px] w-[650px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-500/10 blur-[130px] dark:bg-purple-600/15"
@@ -49,27 +151,27 @@ export default function CTABanner() {
 
       <Container>
         <div className="mx-auto max-w-2xl text-center">
-          {/* Eyebrow Label matching Image 4 */}
+          {/* Eyebrow Label matching Image 1 & 4 */}
           <ScrollReveal>
             <p className="text-[11px] font-bold tracking-[0.28em] text-indigo-600 dark:text-purple-400 uppercase mb-4">
               GET IN TOUCH
             </p>
 
-            {/* Main Headline in Playfair Display */}
+            {/* Main Headline with Cycling Words (Gray to Purple) */}
             <h2
               className="text-5xl sm:text-6xl md:text-7xl font-bold leading-[1.05] tracking-tight text-slate-950 dark:text-white"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
               Let&apos;s Work
               <br />
-              <span className="text-slate-400 dark:text-white/40">Together.</span>
+              <CyclingWord />
             </h2>
 
             {/* Divider Line */}
             <div className="mx-auto my-8 h-px w-12 bg-slate-300 dark:bg-white/15" />
           </ScrollReveal>
 
-          {/* Interactive Contact Form matching Image 4 */}
+          {/* Interactive Contact Form */}
           <ScrollReveal delay={0.15}>
             <form
               onSubmit={handleSubmit}
@@ -165,7 +267,7 @@ export default function CTABanner() {
               </button>
             </form>
 
-            {/* Bottom Action Buttons matching Image 4 */}
+            {/* Bottom Action Buttons matching Image 1 & 4 */}
             <div className="flex flex-wrap items-center justify-center gap-3.5">
               {/* Send Email */}
               <a

@@ -11,7 +11,7 @@ export default function Hero() {
     );
 
   return (
-    <section className="relative overflow-hidden pt-28 pb-20 md:pt-36 md:pb-32">
+    <section className="relative overflow-hidden pt-28 pb-20 md:pt-36 md:pb-32" id="home">
       {/* 3D Interactive WebGL Torus Knot Background */}
       <ThreeHeroCanvas />
 

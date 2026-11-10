@@ -1,6 +1,7 @@
 import React from "react";
 import { Phone, Mail, MapPin } from "lucide-react";
 import Container from "@/components/ui/Container";
+import Logo from "@/components/ui/Logo";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -11,14 +12,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Col 1: Brand Info */}
           <div>
-            <a href="#" className="flex items-center gap-3">
-              <img
-                src="/logo.svg"
-                alt="Fortesia Tech Innovation"
-                className="h-9 w-auto"
-                width="190"
-                height="44"
-              />
+            <a href="#home" className="flex items-center gap-3">
+              <Logo className="h-9 w-auto" width="180" height="40" />
             </a>
             <p className="mt-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
               <strong>Fortesia Tech Innovation</strong> adalah mitra rekayasa perangkat lunak dan agensi digital terpercaya di Indonesia yang berdedikasi membangun website berkecepatan tinggi, aplikasi mobile andal, dan strategi SEO organik yang menghasilkan leads nyata.

@@ -3,10 +3,12 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
 import ThemeToggle from "@/components/ui/ThemeToggle";
+import Logo from "@/components/ui/Logo";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,13 +19,38 @@ export default function Header() {
   }, []);
 
   const navLinks = [
-    { label: "Home", href: "#" },
-    { label: "Layanan", href: "#layanan" },
-    { label: "Kapabilitas", href: "#kapabilitas" },
-    { label: "Keunggulan", href: "#keunggulan" },
-    { label: "Alur Kerja", href: "#alur-kerja" },
-    { label: "FAQ", href: "#faq" },
+    { label: "Home", id: "home", href: "#home" },
+    { label: "Layanan", id: "layanan", href: "#layanan" },
+    { label: "Kapabilitas", id: "kapabilitas", href: "#kapabilitas" },
+    { label: "Keunggulan", id: "keunggulan", href: "#keunggulan" },
+    { label: "Alur Kerja", id: "alur-kerja", href: "#alur-kerja" },
+    { label: "FAQ", id: "faq", href: "#faq" },
   ];
+
+  // Active section tracking via IntersectionObserver
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+    navLinks.forEach(({ id }) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActiveSection(id);
+          }
+        },
+        { threshold: 0.25, rootMargin: "-10% 0px -40% 0px" }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+    return () => observers.forEach((obs) => obs.disconnect());
+  }, []);
+
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    setMobileOpen(false);
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
@@ -34,28 +61,37 @@ export default function Header() {
             : "w-full max-w-7xl px-6 py-5 rounded-none border-transparent bg-transparent mt-0 md:w-full"
         }`}
       >
-        {/* Logo Brand */}
-        <a href="#" className="flex items-center gap-3 transition-opacity hover:opacity-85" aria-label="Fortesia Tech Innovation">
-          <img
-            src="/logo.svg"
-            alt="Logo Fortesia Tech Innovation"
-            className="h-9 w-auto"
-            width="190"
-            height="42"
-          />
-        </a>
+        {/* Logo Brand with dynamic light/dark typography */}
+        <button
+          onClick={() => scrollTo("home")}
+          className="flex items-center gap-2.5 transition-opacity hover:opacity-85 text-left"
+          aria-label="Fortesia Tech Innovation"
+        >
+          <Logo className="h-8.5 w-auto" width="175" height="38" />
+        </button>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden items-center gap-7 md:flex" aria-label="Navigasi Menu">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-sm font-semibold text-slate-700 transition-colors hover:text-indigo-600 dark:text-slate-200 dark:hover:text-purple-400"
-            >
-              {link.label}
-            </a>
-          ))}
+        {/* Desktop Navigation Links with Active Scrollspy Color Change */}
+        <nav className="hidden items-center gap-2 md:flex" aria-label="Navigasi Menu">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.id;
+            return (
+              <a
+                key={link.id}
+                href={link.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollTo(link.id);
+                }}
+                className={`relative px-3.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 rounded-full ${
+                  isActive
+                    ? "bg-indigo-500/10 text-indigo-600 dark:bg-purple-500/20 dark:text-purple-300 font-bold shadow-sm"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 dark:text-slate-300 dark:hover:text-white dark:hover:bg-white/[0.05]"
+                }`}
+              >
+                {link.label}
+              </a>
+            );
+          })}
         </nav>
 
         {/* Right Action Tools: ThemeToggle & CTA Button */}
@@ -87,17 +123,27 @@ export default function Header() {
       {/* Mobile Navigation Drawer */}
       {mobileOpen && (
         <div className="pointer-events-auto fixed inset-x-4 top-20 rounded-2xl border border-slate-200/80 bg-white/95 p-6 shadow-2xl backdrop-blur-xl md:hidden dark:border-white/10 dark:bg-[#0c0b1e]/95">
-          <nav className="flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="text-base font-semibold text-slate-800 transition-colors hover:text-indigo-600 dark:text-slate-200 dark:hover:text-purple-400"
-              >
-                {link.label}
-              </a>
-            ))}
+          <nav className="flex flex-col gap-2">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.id;
+              return (
+                <a
+                  key={link.id}
+                  href={link.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollTo(link.id);
+                  }}
+                  className={`px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+                    isActive
+                      ? "bg-indigo-500/10 text-indigo-600 font-bold dark:bg-purple-500/20 dark:text-purple-300"
+                      : "text-slate-800 hover:text-indigo-600 dark:text-slate-200 dark:hover:text-purple-400"
+                  }`}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
             <div className="pt-2">
               <a
                 href="https://wa.me/6285893861418?text=Halo%20Fortesia%20Tech%20Innovation,%20saya%20ingin%20konsultasi%20proyek."
@@ -114,4 +160,3 @@ export default function Header() {
     </header>
   );
 }
-
