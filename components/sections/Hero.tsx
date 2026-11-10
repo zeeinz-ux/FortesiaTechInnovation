@@ -1,5 +1,5 @@
 import React from "react";
-import { Star, ShieldCheck, Activity, ChevronDown } from "lucide-react";
+import { Star, ShieldCheck, Activity, ChevronDown, Code2 } from "lucide-react";
 import Container from "@/components/ui/Container";
 
 export default function Hero() {
@@ -19,9 +19,9 @@ export default function Hero() {
 
       <Container className="relative">
         <div className="mx-auto max-w-4xl text-center">
-          {/* Badge Pill */}
+          {/* Badge Pill with Lucide Code2 Icon */}
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50/80 px-3.5 py-1.5 text-xs font-semibold text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+            <Code2 className="h-3.5 w-3.5 text-indigo-500 dark:text-purple-400" />
             <span>Software House &amp; Rekayasa Digital Indonesia</span>
           </div>
 
@@ -30,7 +30,7 @@ export default function Hero() {
             Bangun Website Kencang &amp; Aplikasi Andal yang Menghasilkan Penjualan.
           </h1>
 
-          {/* Value Subtitle (Bebas AI Slop) */}
+          {/* Value Subtitle */}
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg dark:text-slate-300">
             Hentikan kehilangan calon klien akibat website lemot atau aplikasi yang sering bermasalah.{" "}
             <strong className="font-semibold text-slate-900 dark:text-white">
@@ -87,7 +87,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Hero Visual Card (Inspired by the Nexora Dark Dashboard Screenshot) */}
+        {/* Hero Visual Card */}
         <div className="mx-auto mt-14 max-w-5xl">
           <div className="glass-panel overflow-hidden rounded-2xl p-6 sm:p-8">
             {/* Window Topbar */}
@@ -100,8 +100,9 @@ export default function Hero() {
               <span className="text-xs font-bold tracking-wider text-slate-600 uppercase dark:text-indigo-300">
                 FORTESIA HIGH-PERFORMANCE ENGINE
               </span>
-              <span className="rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-                ● Live Production Ready
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                Live Production Ready
               </span>
             </div>
 

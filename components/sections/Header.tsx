@@ -29,7 +29,7 @@ export default function Header() {
       <div
         className={`pointer-events-auto flex items-center justify-between transition-all duration-500 ${
           scrolled
-            ? "mt-3 w-[94%] max-w-6xl rounded-full border border-slate-200/60 bg-white/85 px-6 py-2.5 shadow-xl backdrop-blur-md dark:border-white/[0.08] dark:bg-[#090815]/85 dark:shadow-2xl"
+            ? "mt-4 w-[92%] md:w-auto md:gap-10 rounded-full border border-slate-200/80 bg-white/80 px-6 py-2.5 shadow-2xl backdrop-blur-md dark:border-white/[0.12] dark:bg-[#07070e]/85"
             : "w-full max-w-7xl px-6 py-5 rounded-none border-transparent bg-transparent"
         }`}
       >

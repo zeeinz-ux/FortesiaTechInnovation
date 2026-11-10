@@ -67,8 +67,9 @@ export default function CapabilityShowcase() {
               <span className="text-xs font-bold tracking-wider text-slate-700 uppercase dark:text-white">
                 SISTEM MONITORING MUTU
               </span>
-              <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-                ● Live Testing
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                Live Testing
               </span>
             </div>
 
