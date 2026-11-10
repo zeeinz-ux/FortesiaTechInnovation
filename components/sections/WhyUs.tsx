@@ -33,7 +33,7 @@ export default function WhyUs() {
             Standar Keunggulan
           </div>
           <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl dark:text-white">
-            Kenapa Pelaku Bisnis Memilih <span className="text-gradient">Fortesia</span>?
+            Kenapa Pelaku Bisnis Memilih Fortesia?
           </h2>
           <p className="mt-4 text-base text-slate-600 dark:text-slate-300">
             Banyak agensi membebankan biaya mahal untuk hasil template siap pakai yang lambat. Kami bekerja dengan komitmen rekayasa perangkat lunak sejati.

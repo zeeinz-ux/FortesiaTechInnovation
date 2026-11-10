@@ -34,7 +34,7 @@ export default function Testimonials() {
             Bukti Kepercayaan
           </div>
           <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl dark:text-white">
-            Apa Kata Mereka yang <span className="text-gradient">Telah Bekerja Sama</span>?
+            Apa Kata Mereka yang Telah Bekerja Sama?
           </h2>
           <p className="mt-4 text-base text-slate-600 dark:text-slate-300">
             Keberhasilan produk digital Anda adalah tolak ukur reputasi kami.

@@ -25,30 +25,13 @@ export default function Header() {
   ];
 
   return (
-    <>
-      {/* Top Notification Announcement */}
-      <div className="border-b border-indigo-500/10 bg-indigo-500/5 px-4 py-1.5 text-center text-xs text-slate-600 dark:border-purple-500/20 dark:bg-purple-950/20 dark:text-slate-300">
-        <span>
-          ⚡ <strong>Menerima Proyek Baru</strong> • Diskusi Langsung dengan Tim Engineer • WhatsApp:{" "}
-          <a
-            href="https://wa.me/6285893861418"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-bold text-indigo-600 underline hover:text-indigo-700 dark:text-cyan-400 dark:hover:text-cyan-300"
-          >
-            +62 858-9386-1418
-          </a>
-        </span>
-      </div>
-
-      {/* Main Sticky Header */}
-      <header
-        className={`sticky top-0 z-40 w-full transition-all duration-300 ${
-          scrolled
-            ? "border-b border-slate-200/80 bg-white/85 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-[#07070e]/85 dark:shadow-black/50"
-            : "bg-transparent"
-        }`}
-      >
+    <header
+      className={`sticky top-0 z-40 w-full transition-all duration-300 ${
+        scrolled
+          ? "border-b border-slate-200/80 bg-white/90 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-[#07070e]/90 dark:shadow-black/50"
+          : "bg-transparent"
+      }`}
+    >
         <Container className="flex h-18 items-center justify-between">
           {/* Logo Brand */}
           <a href="#" className="flex items-center gap-3" aria-label="Fortesia Tech Innovation">
@@ -136,7 +119,6 @@ export default function Header() {
           </div>
         )}
       </header>
-    </>
   );
 }
 

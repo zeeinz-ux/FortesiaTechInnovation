@@ -33,7 +33,7 @@ export default function Workflow() {
             Alur Kerja Praktis
           </div>
           <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl dark:text-white">
-            4 Tahap Mudah <span className="text-gradient">Menuju Peluncuran</span>
+            4 Tahap Mudah Menuju Peluncuran
           </h2>
           <p className="mt-4 text-base text-slate-600 dark:text-slate-300">
             Proses kolaborasi yang jelas, terstruktur, dan transparan tanpa kejutan biaya di tengah jalan.

@@ -19,14 +19,14 @@ export default function Hero() {
       <Container className="relative">
         <div className="mx-auto max-w-4xl text-center">
           {/* Badge Pill */}
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-4 py-1.5 text-xs font-semibold text-indigo-700 dark:border-purple-500/30 dark:bg-purple-500/15 dark:text-purple-300">
-            <span className="text-sm">✨</span>
-            <span>Partner Software House &amp; Rekayasa Digital Indonesia</span>
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50/80 px-3.5 py-1.5 text-xs font-semibold text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+            <span>Software House &amp; Rekayasa Digital Indonesia</span>
           </div>
 
           {/* Main H1 Headline */}
           <h1 className="text-4xl font-black tracking-tight text-slate-900 sm:text-5xl md:text-6xl dark:text-white">
-            Bangun <span className="text-gradient">Website Kencang</span> &amp; Aplikasi Andal yang Menghasilkan Penjualan.
+            Bangun Website Kencang &amp; Aplikasi Andal yang Menghasilkan Penjualan.
           </h1>
 
           {/* Value Subtitle (Bebas AI Slop) */}
@@ -64,28 +64,22 @@ export default function Hero() {
           </div>
 
           {/* Trust Metrics Bar */}
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-500 sm:text-sm dark:text-slate-400">
-            <div className="flex items-center gap-1.5">
-              <span className="text-amber-500">★★★★★</span>
-              <span>
-                Kepuasan Klien <strong className="text-slate-900 dark:text-white">4.9 / 5.0</strong>
-              </span>
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-xs font-medium text-slate-600 sm:text-sm dark:text-slate-400">
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-amber-500 dark:text-amber-400">4.9 / 5.0</span>
+              <span>Kepuasan Klien</span>
             </div>
-            <div className="flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500" />
-              <span>
-                <strong className="text-slate-900 dark:text-white">99.8%</strong> Sistem Stabil &amp; Kencang
-              </span>
+            <div className="hidden h-3.5 w-px bg-slate-300 sm:block dark:bg-white/10" aria-hidden="true" />
+            <div className="flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-emerald-500" />
+              <span>99.8% Stabilitas Sistem</span>
             </div>
-            <div className="flex items-center gap-1.5">
-              <span className="text-cyan-500">✓</span>
-              <span>
-                <strong className="text-slate-900 dark:text-white">100% Hak Milik</strong> Source Code
-              </span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <span className="text-purple-500">⚡</span>
-              <span>Tanpa Biaya Tersembunyi</span>
+            <div className="hidden h-3.5 w-px bg-slate-300 sm:block dark:bg-white/10" aria-hidden="true" />
+            <div className="flex items-center gap-2">
+              <svg className="h-4 w-4 text-indigo-500 dark:text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              <span>100% Hak Milik Source Code</span>
             </div>
           </div>
         </div>
@@ -139,14 +133,6 @@ export default function Hero() {
                   Schema.org &amp; Semantic HTML
                 </div>
               </div>
-            </div>
-
-            {/* Terminal Line Mockup */}
-            <div className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-lg bg-slate-900 px-4 py-3 font-mono text-xs text-slate-300">
-              <div>
-                <span className="text-purple-400">fortesia-engine:~$</span> deploy --prod --seo=true --speed=100
-              </div>
-              <span className="font-bold text-emerald-400">✓ Production Verified</span>
             </div>
           </div>
         </div>

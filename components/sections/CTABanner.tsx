@@ -31,7 +31,7 @@ export default function CTABanner() {
           <div className="relative z-10 flex flex-col items-center justify-between gap-8 lg:flex-row">
             <div className="max-w-2xl text-center lg:text-left">
               <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl">
-                Siap Mewujudkan Produk Digital <span className="text-gradient">Unggulan untuk Bisnis Anda?</span>
+                Siap Mewujudkan Produk Digital Unggulan untuk Bisnis Anda?
               </h2>
               <p className="mt-4 text-base leading-relaxed text-slate-300">
                 Diskusikan kebutuhan pembuatan website, landing page, aplikasi mobile, maupun strategi SEO Anda hari ini bersama tim rekayasa Fortesia. Bebas biaya konsultasi awal dan tanpa perantara berbelit-belit.

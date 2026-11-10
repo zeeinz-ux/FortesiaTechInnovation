@@ -90,7 +90,7 @@ export default function ServicesGrid() {
             Katalog Layanan Digital
           </div>
           <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl dark:text-white">
-            Solusi Rekayasa Digital untuk <span className="text-gradient">Pertumbuhan Bisnis</span>
+            Solusi Rekayasa Digital untuk Pertumbuhan Bisnis
           </h2>
           <p className="mt-4 text-base text-slate-600 dark:text-slate-300">
             Kami tidak menjual website template instan yang berat dan pasaran. Setiap baris kode dirancang spesifik untuk mendukung model bisnis, brand identity, dan performa konversi Anda.

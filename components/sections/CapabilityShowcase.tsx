@@ -51,7 +51,7 @@ export default function CapabilityShowcase() {
             Transparansi Mutu Rekayasa
           </div>
           <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl dark:text-white">
-            Kualitas Nyata yang Kami Bangun <span className="text-gradient">di Balik Layar</span>
+            Kualitas Nyata yang Kami Bangun di Balik Layar
           </h2>
           <p className="mt-4 text-base text-slate-600 dark:text-slate-300">
             Bukan sekadar tampilan luar yang rapi, setiap sistem yang kami serahkan harus lolos pengujian performa, keamanan, dan standar perayapan Google secara ketat.

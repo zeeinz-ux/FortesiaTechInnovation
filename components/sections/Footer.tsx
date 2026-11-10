@@ -103,8 +103,8 @@ export default function Footer() {
               Kontak Resmi
             </h3>
             <div className="mt-4 space-y-3 text-sm text-slate-600 dark:text-slate-400">
-              <div className="flex items-center gap-2">
-                <span className="text-emerald-500">💬</span>
+              <div className="flex items-center gap-2.5">
+                <span className="font-semibold text-slate-400">WA:</span>
                 <a
                   href="https://wa.me/6285893861418"
                   target="_blank"
@@ -114,8 +114,8 @@ export default function Footer() {
                   +62 858-9386-1418
                 </a>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="text-indigo-500 dark:text-cyan-400">✉️</span>
+              <div className="flex items-center gap-2.5">
+                <span className="font-semibold text-slate-400">Email:</span>
                 <a
                   href="mailto:halo@fortesiatech.com"
                   className="hover:text-indigo-600 dark:hover:text-purple-400"
@@ -123,8 +123,8 @@ export default function Footer() {
                   halo@fortesiatech.com
                 </a>
               </div>
-              <div className="flex items-start gap-2">
-                <span className="text-purple-500">📍</span>
+              <div className="flex items-start gap-2.5">
+                <span className="font-semibold text-slate-400">Area:</span>
                 <span>
                   Melayani Klien Seluruh Indonesia (Jakarta, Surabaya, Bandung, Bali &amp; Remote)
                 </span>
@@ -138,12 +138,12 @@ export default function Footer() {
           <div>
             &copy; {currentYear} <strong>Fortesia Tech Innovation</strong>. All rights reserved.
           </div>
-          <div className="flex items-center gap-3">
-            <span>Kecepatan Ekstrem</span>
+          <div className="flex items-center gap-4">
+            <a href="#layanan" className="hover:underline">Layanan</a>
             <span>•</span>
-            <span>100% Bebas AI-Slop</span>
+            <a href="#keunggulan" className="hover:underline">Keunggulan</a>
             <span>•</span>
-            <span>SEO Teruji</span>
+            <a href="#faq" className="hover:underline">FAQ</a>
           </div>
         </div>
       </Container>
