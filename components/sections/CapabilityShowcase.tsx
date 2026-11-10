@@ -150,6 +150,7 @@ export default function CapabilityShowcase() {
                                 src={`https://cdn.simpleicons.org/${skill.icon}`}
                                 alt={skill.name}
                                 loading="lazy"
+                                decoding="async"
                                 width="18"
                                 height="18"
                                 className="h-4.5 w-4.5 opacity-70 transition-opacity group-hover/pill:opacity-100 dark:invert"

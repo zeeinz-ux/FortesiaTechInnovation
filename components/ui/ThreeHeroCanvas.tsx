@@ -11,8 +11,8 @@ export default function ThreeHeroCanvas() {
     const container = containerRef.current;
 
     const isMobile = window.innerWidth < 768;
-    // Generous particle count for high density and majestic presence
-    const particleCount = isMobile ? 12000 : 34000;
+    // Optimized particle count: crisp, dense, and lightweight on CPU/GPU
+    const particleCount = isMobile ? 8000 : 18000;
 
     const getIsDark = () => document.documentElement.classList.contains("dark");
 
@@ -26,17 +26,20 @@ export default function ThreeHeroCanvas() {
     );
     camera.position.z = 4.8;
 
-    // WebGL Renderer
+    // WebGL Renderer with performance-first configuration
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
       antialias: !isMobile,
       powerPreference: "high-performance",
     });
     renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1 : 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1 : 1.5));
     container.appendChild(renderer.domElement);
 
-    const mouse = { x: 0, y: 0 };
+    const mouse = { x: -9999, y: -9999 };
+    let hasMouseInteraction = false;
+    let particlesDisplaced = false;
+    let idleTimer: any = null;
     const clock = new THREE.Clock();
 
     // Geometry: Expanded TorusKnot matching the wide red circle scope from user
@@ -93,7 +96,7 @@ export default function ThreeHeroCanvas() {
     updateColors(isDark);
 
     const material = new THREE.PointsMaterial({
-      size: isMobile ? 0.024 : 0.019,
+      size: isMobile ? 0.024 : 0.021,
       vertexColors: true,
       blending: THREE.NormalBlending,
       transparent: true,
@@ -116,16 +119,31 @@ export default function ThreeHeroCanvas() {
       attributeFilter: ["class"],
     });
 
-    // Mouse tracking across window
+    // Mouse tracking across window (passive listener, on-demand activation)
     const onMouseMove = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
       const clientX = e.clientX - rect.left;
       const clientY = e.clientY - rect.top;
       mouse.x = (clientX / rect.width) * 2 - 1;
       mouse.y = -(clientY / rect.height) * 2 + 1;
+      hasMouseInteraction = true;
+      particlesDisplaced = true;
+
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => {
+        hasMouseInteraction = false;
+      }, 1200);
     };
+
+    const onMouseLeave = () => {
+      mouse.x = -9999;
+      mouse.y = -9999;
+      hasMouseInteraction = false;
+    };
+
     if (!isMobile) {
       window.addEventListener("mousemove", onMouseMove, { passive: true });
+      window.addEventListener("mouseleave", onMouseLeave, { passive: true });
     }
 
     // Resize handler
@@ -137,7 +155,7 @@ export default function ThreeHeroCanvas() {
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
     };
-    window.addEventListener("resize", onResize);
+    window.addEventListener("resize", onResize, { passive: true });
 
     // Pre-allocated vectors for 60 FPS physics loop (zero GC allocations)
     const mouseWorld = new THREE.Vector3();
@@ -165,26 +183,25 @@ export default function ThreeHeroCanvas() {
 
       const elapsed = clock.getElapsedTime();
 
-      // Continuous majestic rotation
+      // Continuous majestic rotation (pure GPU operation, 0% CPU cost)
       particles.rotation.y = elapsed * 0.05;
       particles.rotation.x = Math.sin(elapsed * 0.03) * 0.06;
       particles.rotation.z = Math.cos(elapsed * 0.02) * 0.04;
       particles.updateMatrixWorld();
 
-      if (!isMobile) {
-        // Map 2D mouse coordinates to 3D world plane at z=0
+      // Physics Repel + Elastic Return only executed when particles are actually displaced
+      if (!isMobile && particlesDisplaced) {
         const vFov = (camera.fov * Math.PI) / 180;
         const planeHalfHeight = Math.tan(vFov / 2) * camera.position.z;
         const planeHalfWidth = planeHalfHeight * camera.aspect;
 
         mouseWorld.set(mouse.x * planeHalfWidth, mouse.y * planeHalfHeight, 0);
-
-        // Transform mouse coordinate into local particle space
         mouseLocal.copy(mouseWorld);
         particles.worldToLocal(mouseLocal);
 
-        // Physics Repel + Elastic Return
         const repelRadius = 1.6;
+        let totalMovement = 0;
+
         for (let i = 0; i < particleCount; i++) {
           const ix = i * 3;
           const iy = i * 3 + 1;
@@ -196,19 +213,19 @@ export default function ThreeHeroCanvas() {
 
           const dist = currentPos.distanceTo(mouseLocal);
 
-          // Cursor Repel: particles push AWAY when cursor gets close
-          if (dist < repelRadius) {
-            const force = (repelRadius - dist) * 0.016;
+          // Cursor Repel
+          if (hasMouseInteraction && dist < repelRadius) {
+            const force = (repelRadius - dist) * 0.018;
             dirVec.subVectors(currentPos, mouseLocal).normalize();
             velVec.add(dirVec.multiplyScalar(force));
           }
 
-          // Spring force pulling back to original geometry
-          springVec.subVectors(origPos, currentPos).multiplyScalar(0.002);
+          // Spring force pulling back to original position
+          springVec.subVectors(origPos, currentPos).multiplyScalar(0.0035);
           velVec.add(springVec);
 
-          // Friction damping
-          velVec.multiplyScalar(0.94);
+          // Damping
+          velVec.multiplyScalar(0.92);
 
           positions[ix] += velVec.x;
           positions[iy] += velVec.y;
@@ -217,10 +234,17 @@ export default function ThreeHeroCanvas() {
           velocities[ix] = velVec.x;
           velocities[iy] = velVec.y;
           velocities[iz] = velVec.z;
+
+          totalMovement += Math.abs(velVec.x) + Math.abs(velVec.y) + Math.abs(velVec.z);
         }
 
         if (geometry.attributes.position) {
           geometry.attributes.position.needsUpdate = true;
+        }
+
+        // Put physics loop to sleep once particles return to rest
+        if (!hasMouseInteraction && totalMovement < 0.005) {
+          particlesDisplaced = false;
         }
       }
 
@@ -231,7 +255,9 @@ export default function ThreeHeroCanvas() {
 
     return () => {
       cancelAnimationFrame(animationFrameId);
+      clearTimeout(idleTimer);
       window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseleave", onMouseLeave);
       window.removeEventListener("resize", onResize);
       themeObserver.disconnect();
       intersectionObserver.disconnect();
