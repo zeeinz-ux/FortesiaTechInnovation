@@ -11,7 +11,7 @@ export default function Hero() {
     );
 
   return (
-    <section className="relative overflow-hidden pt-28 pb-20 md:pt-36 md:pb-32" id="home">
+    <section className="relative min-h-[88vh] flex items-center justify-center overflow-hidden pt-28 pb-16 md:pt-36 md:pb-24" id="home">
       {/* 3D Interactive WebGL Torus Knot Background */}
       <ThreeHeroCanvas />
 
@@ -100,60 +100,6 @@ export default function Hero() {
               <span>
                 <strong className="text-slate-950 dark:text-white">100%</strong> Hak Milik Source Code
               </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Hero Visual Card */}
-        <div className="mx-auto mt-14 max-w-5xl">
-          <div className="glass-panel overflow-hidden rounded-2xl p-6 sm:p-8">
-            {/* Window Topbar */}
-            <div className="mb-6 flex items-center justify-between border-b border-slate-200 pb-4 dark:border-white/10">
-              <div className="flex items-center gap-2">
-                <span className="h-3 w-3 rounded-full bg-rose-500" />
-                <span className="h-3 w-3 rounded-full bg-amber-500" />
-                <span className="h-3 w-3 rounded-full bg-emerald-500" />
-              </div>
-              <span className="text-xs font-bold tracking-wider text-slate-800 uppercase dark:text-indigo-300">
-                FORTESIA HIGH-PERFORMANCE ENGINE
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                Live Production Ready
-              </span>
-            </div>
-
-            {/* Metrics Grid */}
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-              <div className="rounded-xl border border-slate-200/90 bg-slate-50/70 p-4 dark:border-white/5 dark:bg-white/[0.02]">
-                <div className="text-xs font-medium text-slate-600 dark:text-slate-400">Google PageSpeed Score</div>
-                <div className="my-1 text-2xl font-black text-emerald-600 sm:text-3xl dark:text-emerald-400">
-                  100 / 100
-                </div>
-                <div className="text-xs font-semibold text-emerald-700 dark:text-emerald-300">
-                  Lolos Core Web Vitals
-                </div>
-              </div>
-
-              <div className="rounded-xl border border-slate-200/90 bg-slate-50/70 p-4 dark:border-white/5 dark:bg-white/[0.02]">
-                <div className="text-xs font-medium text-slate-600 dark:text-slate-400">Waktu Muat (FCP)</div>
-                <div className="my-1 text-2xl font-black text-indigo-600 sm:text-3xl dark:text-cyan-400">
-                  0.38 Detik
-                </div>
-                <div className="text-xs font-semibold text-indigo-700 dark:text-cyan-300">
-                  Akses Cepat di Semua HP
-                </div>
-              </div>
-
-              <div className="rounded-xl border border-slate-200/90 bg-slate-50/70 p-4 dark:border-white/5 dark:bg-white/[0.02]">
-                <div className="text-xs font-medium text-slate-600 dark:text-slate-400">SEO Search Visibility</div>
-                <div className="my-1 text-2xl font-black text-purple-600 sm:text-3xl dark:text-purple-400">
-                  A+ Grade
-                </div>
-                <div className="text-xs font-semibold text-purple-700 dark:text-purple-300">
-                  Schema.org &amp; Semantic HTML
-                </div>
-              </div>
             </div>
           </div>
         </div>

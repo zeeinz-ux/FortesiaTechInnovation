@@ -11,20 +11,20 @@ export default function ThreeHeroCanvas() {
     const container = containerRef.current;
 
     const isMobile = window.innerWidth < 768;
-    // Balanced particle count matching Zeinz Woven Light Hero
-    const particleCount = isMobile ? 12000 : 36000;
+    // Tailored particle count tightly framing the headline area per Image 1
+    const particleCount = isMobile ? 8500 : 24000;
 
     const getIsDark = () => document.documentElement.classList.contains("dark");
 
     // Scene & Camera
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
-      70,
+      60,
       container.clientWidth / container.clientHeight,
       0.1,
       1000
     );
-    camera.position.z = 5.0;
+    camera.position.z = 5.6;
 
     // WebGL Renderer
     const renderer = new THREE.WebGLRenderer({
@@ -39,12 +39,12 @@ export default function ThreeHeroCanvas() {
     const mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
     const clock = new THREE.Clock();
 
-    // Geometry: Balanced TorusKnot matching Zeinz Woven Light Hero
+    // Geometry: Focused TorusKnot matching circled area in Image 1
     const positions = new Float32Array(particleCount * 3);
     const colors = new Float32Array(particleCount * 3);
 
     const geometry = new THREE.BufferGeometry();
-    const knot = new THREE.TorusKnotGeometry(1.5, 0.5, 200, 32);
+    const knot = new THREE.TorusKnotGeometry(1.2, 0.36, 180, 26);
     const knotPositions = knot.attributes.position;
 
     const updateColors = (isDark: boolean) => {
@@ -66,7 +66,7 @@ export default function ThreeHeroCanvas() {
 
     for (let i = 0; i < particleCount; i++) {
       const idx = i % knotPositions.count;
-      const spread = 0.1;
+      const spread = 0.08;
       const x = knotPositions.getX(idx) + (Math.random() - 0.5) * spread;
       const y = knotPositions.getY(idx) + (Math.random() - 0.5) * spread;
       const z = knotPositions.getZ(idx) + (Math.random() - 0.5) * spread;
@@ -83,15 +83,16 @@ export default function ThreeHeroCanvas() {
     updateColors(isDark);
 
     const material = new THREE.PointsMaterial({
-      size: isMobile ? 0.024 : 0.02,
+      size: isMobile ? 0.022 : 0.017,
       vertexColors: true,
       blending: THREE.NormalBlending,
       transparent: true,
-      opacity: isDark ? 0.72 : 0.50,
+      opacity: isDark ? 0.72 : 0.48,
     });
 
     const particles = new THREE.Points(geometry, material);
-    particles.position.set(0, 0, 0);
+    // Positioned directly behind the headline area
+    particles.position.set(0, 0.22, 0);
     scene.add(particles);
 
     // Theme observer

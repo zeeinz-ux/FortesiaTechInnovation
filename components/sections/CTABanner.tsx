@@ -28,28 +28,31 @@ const CYCLING_WORDS = [
 function CyclingWord() {
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(true);
-  const [isPurple, setIsPurple] = useState(false);
+  const [isLit, setIsLit] = useState(true);
 
   useEffect(() => {
-    // When index changes, start in gray, then transition to purple
-    const purpleTimer = setTimeout(() => {
-      setIsPurple(true);
-    }, 350);
+    // 1. Lampu nyala ungu terang saat kata baru muncul
+    setIsLit(true);
 
-    // After 2.3s, fade out
+    // 2. Setelah 700ms, lampu perlahan meredup ke abu-abu
+    const dimTimer = setTimeout(() => {
+      setIsLit(false);
+    }, 700);
+
+    // 3. Setelah 2.4s, kata meluncur ke atas dan menghilang
     const fadeTimer = setTimeout(() => {
       setVisible(false);
     }, 2400);
 
-    // Advance to next word at 2.8s
+    // 4. Di 2.8s, kata berganti dan lampu ungu menyala kembali
     const nextTimer = setTimeout(() => {
       setIndex((prev) => (prev + 1) % CYCLING_WORDS.length);
-      setIsPurple(false);
+      setIsLit(true);
       setVisible(true);
     }, 2800);
 
     return () => {
-      clearTimeout(purpleTimer);
+      clearTimeout(dimTimer);
       clearTimeout(fadeTimer);
       clearTimeout(nextTimer);
     };
@@ -57,16 +60,16 @@ function CyclingWord() {
 
   return (
     <span
-      className={`inline-block transition-all duration-500 ease-out ${
-        isPurple
-          ? "text-indigo-600 dark:text-purple-400 drop-shadow-[0_0_20px_rgba(168,85,247,0.35)]"
-          : "text-slate-400 dark:text-zinc-500"
+      className={`inline-block transition-all duration-700 ease-out ${
+        isLit
+          ? "text-indigo-600 dark:text-purple-400 drop-shadow-[0_0_26px_rgba(168,85,247,0.55)]"
+          : "text-slate-400 dark:text-zinc-500 drop-shadow-none"
       }`}
       style={{
         opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(12px)",
+        transform: visible ? "translateY(0)" : "translateY(-12px)",
         transition:
-          "opacity 0.35s cubic-bezier(0.16,1,0.3,1), transform 0.35s cubic-bezier(0.16,1,0.3,1), color 0.5s ease",
+          "opacity 0.35s cubic-bezier(0.16,1,0.3,1), transform 0.35s cubic-bezier(0.16,1,0.3,1), color 0.75s ease, filter 0.75s ease",
       }}
     >
       {CYCLING_WORDS[index]}
