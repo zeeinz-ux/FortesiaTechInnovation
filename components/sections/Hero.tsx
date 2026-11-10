@@ -15,6 +15,16 @@ export default function Hero() {
       {/* 3D Interactive WebGL Torus Knot Background */}
       <ThreeHeroCanvas />
 
+      {/* Subtle Grid Overlay - Confined to Hero with Smooth Bottom Fade (Matches Zeinz Woven Light Hero) */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-20 [mask-image:linear-gradient(to_bottom,black_40%,transparent_90%)]"
+        style={{
+          backgroundImage: `linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px)`,
+          backgroundSize: "60px 60px",
+        }}
+        aria-hidden="true"
+      />
+
       {/* Subtle Ambient Radial Glow */}
       <div
         className="pointer-events-none absolute top-12 left-1/2 -z-10 h-[500px] w-[750px] -translate-x-1/2 rounded-full bg-indigo-500/10 blur-[120px] dark:bg-purple-600/20"
