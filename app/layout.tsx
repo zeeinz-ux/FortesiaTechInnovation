@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/logo.svg",
+        url: "/og.svg",
         width: 1200,
         height: 630,
         alt: "Fortesia Tech Innovation - Software House & Digital Studio Indonesia",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     title: "Fortesia Tech Innovation | Jasa Pembuatan Website, Web App & Mobile App",
     description:
       "Partner software house terpercaya: web app, mobile app, landing page, dan SEO Indonesia. Hubungi WhatsApp +62 858-9386-1418.",
-    images: ["/logo.svg"],
+    images: ["/og.svg"],
   },
   robots: {
     index: true,

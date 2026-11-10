@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" fill="none">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#07070e" />
+      <stop offset="50%" stop-color="#0c0b1d" />
+      <stop offset="100%" stop-color="#06060c" />
+    </linearGradient>
+    
+    <radialGradient id="meshGlowLeft" cx="20%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0" />
+    </radialGradient>
+    
+    <radialGradient id="meshGlowRight" cx="80%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#a855f7" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#a855f7" stop-opacity="0" />
+    </radialGradient>
+
+    <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="45%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#c084fc" />
+    </linearGradient>
+
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="60%" stop-color="#f1f5f9" />
+      <stop offset="100%" stop-color="#cbd5e1" />
+    </linearGradient>
+    
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="15" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="1200" height="630" fill="url(#bgGrad)" />
+  <rect width="1200" height="630" fill="url(#meshGlowLeft)" />
+  <rect width="1200" height="630" fill="url(#meshGlowRight)" />
+
+  <!-- Grid overlay -->
+  <g opacity="0.06" stroke="#ffffff" stroke-width="1">
+    <line x1="0" y1="105" x2="1200" y2="105" />
+    <line x1="0" y1="210" x2="1200" y2="210" />
+    <line x1="0" y1="315" x2="1200" y2="315" />
+    <line x1="0" y1="420" x2="1200" y2="420" />
+    <line x1="0" y1="525" x2="1200" y2="525" />
+    
+    <line x1="200" y1="0" x2="200" y2="630" />
+    <line x1="400" y1="0" x2="400" y2="630" />
+    <line x1="600" y1="0" x2="600" y2="630" />
+    <line x1="800" y1="0" x2="800" y2="630" />
+    <line x1="1000" y1="0" x2="1000" y2="630" />
+  </g>
+
+  <!-- Border Card Frame -->
+  <rect x="30" y="30" width="1140" height="570" rx="28" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2" />
+
+  <!-- Logo Mark (F Shield) -->
+  <g transform="translate(90, 80)">
+    <polygon points="40,2 76,20 76,62 40,80 4,62 4,20" fill="rgba(99,102,241,0.2)" stroke="url(#brandGrad)" stroke-width="3" stroke-linejoin="round" />
+    <path d="M26 22 H58 M26 22 V60 M26 40 H50" stroke="url(#brandGrad)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="58" cy="22" r="3.5" fill="#38bdf8" />
+    <circle cx="50" cy="40" r="3.5" fill="#818cf8" />
+    <circle cx="26" cy="60" r="3.5" fill="#c084fc" />
+    
+    <text x="96" y="44" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="32" font-weight="900" letter-spacing="2" fill="#ffffff">
+      FORTESIA
+    </text>
+    <text x="98" y="68" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="800" letter-spacing="5" fill="url(#brandGrad)">
+      TECH INNOVATION
+    </text>
+  </g>
+
+  <!-- Tag Pill -->
+  <g transform="translate(90, 220)">
+    <rect width="450" height="38" rx="19" fill="rgba(139,92,246,0.15)" stroke="rgba(139,92,246,0.4)" stroke-width="1.5" />
+    <text x="22" y="24" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="14" font-weight="700" fill="#c4b5fd">
+      ⚡ Software House &amp; Rekayasa Digital Indonesia
+    </text>
+  </g>
+
+  <!-- Main Headline -->
+  <text x="90" y="320" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="52" font-weight="900" letter-spacing="-1" fill="url(#textGrad)">
+    Bangun Website Kencang &amp;
+  </text>
+  <text x="90" y="385" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="52" font-weight="900" letter-spacing="-1" fill="url(#brandGrad)">
+    Aplikasi Skala Bisnis Anda.
+  </text>
+
+  <!-- Service Pills -->
+  <g transform="translate(90, 440)">
+    <text x="0" y="0" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="18" font-weight="600" fill="#94a3b8">
+      Website • Landing Page • Custom Web App • Mobile App Android &amp; iOS • Optimasi SEO
+    </text>
+  </g>
+
+  <!-- Contact Bar Bottom -->
+  <g transform="translate(90, 500)">
+    <!-- WhatsApp Box -->
+    <rect width="320" height="50" rx="25" fill="#25D366" />
+    <text x="35" y="31" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="16" font-weight="800" fill="#092e16">
+      WhatsApp: +62 858-9386-1418
+    </text>
+
+    <!-- Email -->
+    <rect x="340" width="280" height="50" rx="25" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+    <text x="375" y="31" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="16" font-weight="700" fill="#ffffff">
+      halo@fortesiatech.com
+    </text>
+  </g>
+
+  <!-- Visual Hologram Graphic Right Side -->
+  <g transform="translate(840, 160)">
+    <circle cx="150" cy="150" r="140" fill="none" stroke="rgba(139,92,246,0.2)" stroke-width="2" stroke-dasharray="8 8" />
+    <circle cx="150" cy="150" r="100" fill="none" stroke="url(#brandGrad)" stroke-width="3" />
+    
+    <!-- Floating badges -->
+    <g transform="translate(20, 40)">
+      <rect width="180" height="46" rx="12" fill="rgba(14,13,29,0.9)" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+      <text x="16" y="28" font-family="monospace" font-size="14" font-weight="800" fill="#10b981">
+        PageSpeed: 100/100
+      </text>
+    </g>
+
+    <g transform="translate(80, 210)">
+      <rect width="180" height="46" rx="12" fill="rgba(14,13,29,0.9)" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+      <text x="22" y="28" font-family="monospace" font-size="14" font-weight="800" fill="#38bdf8">
+        Load Time: 0.38s
+      </text>
+    </g>
+  </g>
+</svg>
+
