@@ -76,7 +76,7 @@ export default function Hero() {
             className="text-4xl font-extrabold tracking-tight text-slate-950 sm:text-5xl md:text-6xl dark:text-white leading-[1.15]"
             style={{ fontFamily: "var(--font-serif), 'Playfair Display', serif" }}
           >
-            Website Kencang &amp; Aplikasi Andal.
+            Website Kencang &amp; Aplikasi Andal
           </h1>
 
           {/* Value Subtitle */}

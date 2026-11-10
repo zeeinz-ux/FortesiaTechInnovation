@@ -27,6 +27,11 @@ export default function Footer() {
             </h3>
             <ul className="mt-4 space-y-2.5 text-sm text-slate-600 dark:text-slate-400">
               <li>
+                <a href="#home" className="transition-colors hover:text-indigo-600 dark:hover:text-purple-400">
+                  Home
+                </a>
+              </li>
+              <li>
                 <a href="#layanan" className="transition-colors hover:text-indigo-600 dark:hover:text-purple-400">
                   Layanan Kami
                 </a>
