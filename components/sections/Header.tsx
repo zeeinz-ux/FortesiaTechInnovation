@@ -70,8 +70,8 @@ export default function Header() {
           <Logo className="h-8.5 w-auto" width="175" height="38" />
         </button>
 
-        {/* Desktop Navigation Links with Active Scrollspy Color Change */}
-        <nav className="hidden items-center gap-2 md:flex" aria-label="Navigasi Menu">
+        {/* Desktop Navigation Links with Active Scrollspy - Clean colored text only, NO background pill or border */}
+        <nav className="hidden items-center gap-7 md:flex" aria-label="Navigasi Menu">
           {navLinks.map((link) => {
             const isActive = activeSection === link.id;
             return (
@@ -82,10 +82,10 @@ export default function Header() {
                   e.preventDefault();
                   scrollTo(link.id);
                 }}
-                className={`relative px-3.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 rounded-full ${
+                className={`relative text-xs font-semibold tracking-wide transition-colors duration-200 ${
                   isActive
-                    ? "bg-indigo-500/10 text-indigo-600 dark:bg-purple-500/20 dark:text-purple-300 font-bold shadow-sm"
-                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 dark:text-slate-300 dark:hover:text-white dark:hover:bg-white/[0.05]"
+                    ? "text-indigo-600 dark:text-purple-400 font-bold"
+                    : "text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
                 }`}
               >
                 {link.label}
@@ -134,9 +134,9 @@ export default function Header() {
                     e.preventDefault();
                     scrollTo(link.id);
                   }}
-                  className={`px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+                  className={`px-3 py-2 text-sm font-semibold transition-colors ${
                     isActive
-                      ? "bg-indigo-500/10 text-indigo-600 font-bold dark:bg-purple-500/20 dark:text-purple-300"
+                      ? "text-indigo-600 dark:text-purple-400 font-bold"
                       : "text-slate-800 hover:text-indigo-600 dark:text-slate-200 dark:hover:text-purple-400"
                   }`}
                 >

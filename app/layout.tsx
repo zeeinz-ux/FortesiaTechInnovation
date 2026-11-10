@@ -4,6 +4,7 @@ import Header from "@/components/sections/Header";
 import Footer from "@/components/sections/Footer";
 import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 import JsonLd from "@/components/seo/JsonLd";
+import LoadingScreen from "@/components/ui/LoadingScreen";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://fortesiatech.com"),
@@ -89,6 +90,9 @@ export default function RootLayout({
 
         {/* Schema.org Structured Data */}
         <JsonLd />
+
+        {/* Global Loading Screen */}
+        <LoadingScreen />
 
         {/* Global Components */}
         <Header />
