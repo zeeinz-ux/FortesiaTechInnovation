@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { Check } from "lucide-react";
 import Container from "@/components/ui/Container";
 
 export default function CapabilityShowcase() {
@@ -160,7 +161,7 @@ export default function CapabilityShowcase() {
                   className="flex items-center justify-between rounded-lg border border-slate-200/80 bg-white/60 p-3 text-xs dark:border-white/5 dark:bg-white/[0.02]"
                 >
                   <div className="flex items-center gap-2 font-medium text-slate-700 dark:text-slate-200">
-                    <span className="text-emerald-500">✓</span>
+                    <Check className="h-3.5 w-3.5 text-emerald-500" />
                     <span>{item.title}</span>
                   </div>
                   <span className="font-bold text-indigo-600 dark:text-cyan-400">{item.status}</span>

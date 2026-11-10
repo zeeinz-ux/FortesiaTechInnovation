@@ -1,4 +1,5 @@
 import React from "react";
+import { Phone, Mail, MapPin } from "lucide-react";
 import Container from "@/components/ui/Container";
 
 export default function Footer() {
@@ -104,7 +105,7 @@ export default function Footer() {
             </h3>
             <div className="mt-4 space-y-3 text-sm text-slate-600 dark:text-slate-400">
               <div className="flex items-center gap-2.5">
-                <span className="font-semibold text-slate-400">WA:</span>
+                <Phone className="h-4 w-4 text-emerald-500" />
                 <a
                   href="https://wa.me/6285893861418"
                   target="_blank"
@@ -115,7 +116,7 @@ export default function Footer() {
                 </a>
               </div>
               <div className="flex items-center gap-2.5">
-                <span className="font-semibold text-slate-400">Email:</span>
+                <Mail className="h-4 w-4 text-indigo-500 dark:text-cyan-400" />
                 <a
                   href="mailto:halo@fortesiatech.com"
                   className="hover:text-indigo-600 dark:hover:text-purple-400"
@@ -124,7 +125,7 @@ export default function Footer() {
                 </a>
               </div>
               <div className="flex items-start gap-2.5">
-                <span className="font-semibold text-slate-400">Area:</span>
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-purple-500" />
                 <span>
                   Melayani Klien Seluruh Indonesia (Jakarta, Surabaya, Bandung, Bali &amp; Remote)
                 </span>

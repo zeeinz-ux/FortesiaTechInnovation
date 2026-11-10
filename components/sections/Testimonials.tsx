@@ -1,4 +1,5 @@
 import React from "react";
+import { Quote } from "lucide-react";
 import Container from "@/components/ui/Container";
 
 export default function Testimonials() {
@@ -48,10 +49,8 @@ export default function Testimonials() {
               className="glass-panel flex flex-col justify-between rounded-2xl p-6 sm:p-8"
             >
               <div>
-                <span className="font-serif text-4xl text-indigo-500/40 dark:text-purple-500/40">
-                  “
-                </span>
-                <p className="mt-2 text-sm leading-relaxed text-slate-700 italic dark:text-slate-300">
+                <Quote className="h-6 w-6 text-indigo-500/40 dark:text-purple-400/40" />
+                <p className="mt-3 text-sm leading-relaxed text-slate-700 italic dark:text-slate-300">
                   {rev.quote}
                 </p>
               </div>

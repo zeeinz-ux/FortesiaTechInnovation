@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { ChevronDown } from "lucide-react";
 import Container from "@/components/ui/Container";
 
 export default function FAQ() {
@@ -63,17 +64,11 @@ export default function FAQ() {
                   className="flex w-full items-center justify-between gap-4 p-5 text-left text-base font-bold text-slate-900 transition-colors hover:text-indigo-600 dark:text-white dark:hover:text-purple-400"
                 >
                   <span>{faq.q}</span>
-                  <svg
+                  <ChevronDown
                     className={`h-5 w-5 shrink-0 transition-transform duration-300 ${
                       isOpen ? "rotate-180 text-indigo-600 dark:text-purple-400" : "text-slate-400"
                     }`}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <polyline points="6 9 12 15 18 9" />
-                  </svg>
+                  />
                 </button>
 
                 {isOpen && (

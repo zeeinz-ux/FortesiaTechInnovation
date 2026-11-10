@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { Check, Mail, Copy, CheckCircle2 } from "lucide-react";
 import Container from "@/components/ui/Container";
 
 export default function CTABanner() {
@@ -39,15 +40,15 @@ export default function CTABanner() {
 
               <div className="mt-6 flex flex-wrap items-center justify-center gap-5 text-xs font-semibold text-slate-200 lg:justify-start">
                 <div className="flex items-center gap-1.5">
-                  <span className="text-emerald-400">✓</span>
+                  <Check className="h-4 w-4 text-emerald-400" />
                   <span>Konsultasi Teknis Gratis</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <span className="text-emerald-400">✓</span>
+                  <Check className="h-4 w-4 text-emerald-400" />
                   <span>Analisis Kebutuhan Komprehensif</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <span className="text-emerald-400">✓</span>
+                  <Check className="h-4 w-4 text-emerald-400" />
                   <span>Respon Cepat via WhatsApp</span>
                 </div>
               </div>
@@ -69,9 +70,19 @@ export default function CTABanner() {
               <button
                 type="button"
                 onClick={copyEmail}
-                className="btn-tactile rounded-full border border-white/20 bg-white/10 px-6 py-3.5 text-center text-xs font-bold text-white backdrop-blur-md hover:bg-white/15"
+                className="btn-tactile flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3.5 text-center text-xs font-bold text-white backdrop-blur-md hover:bg-white/15"
               >
-                {copied ? "✓ Email Tersalin: halo@fortesiatech.com" : "✉ Salin Email: halo@fortesiatech.com"}
+                {copied ? (
+                  <>
+                    <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                    <span>Email Tersalin: halo@fortesiatech.com</span>
+                  </>
+                ) : (
+                  <>
+                    <Mail className="h-4 w-4 text-slate-300" />
+                    <span>Salin Email: halo@fortesiatech.com</span>
+                  </>
+                )}
               </button>
             </div>
           </div>

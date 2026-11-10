@@ -1,4 +1,5 @@
 import React from "react";
+import { Star, ShieldCheck, Activity, ChevronDown } from "lucide-react";
 import Container from "@/components/ui/Container";
 
 export default function Hero() {
@@ -57,29 +58,31 @@ export default function Hero() {
               className="btn-tactile inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white/70 px-6 py-3.5 text-sm font-bold text-slate-700 shadow-sm backdrop-blur-md hover:border-slate-400 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"
             >
               <span>Lihat Layanan Kami</span>
-              <svg className="h-4 w-4 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2">
-                <path d="M19 9l-7 7-7-7" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+              <ChevronDown className="h-4 w-4" />
             </a>
           </div>
 
           {/* Trust Metrics Bar */}
           <div className="mt-12 flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-xs font-medium text-slate-600 sm:text-sm dark:text-slate-400">
             <div className="flex items-center gap-2">
-              <span className="font-bold text-amber-500 dark:text-amber-400">4.9 / 5.0</span>
-              <span>Kepuasan Klien</span>
+              <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
+              <span>
+                <strong className="text-slate-900 dark:text-white">4.9 / 5.0</strong> Kepuasan Klien
+              </span>
             </div>
             <div className="hidden h-3.5 w-px bg-slate-300 sm:block dark:bg-white/10" aria-hidden="true" />
             <div className="flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-emerald-500" />
-              <span>99.8% Stabilitas Sistem</span>
+              <Activity className="h-4 w-4 text-emerald-500" />
+              <span>
+                <strong className="text-slate-900 dark:text-white">99.8%</strong> Stabilitas Sistem
+              </span>
             </div>
             <div className="hidden h-3.5 w-px bg-slate-300 sm:block dark:bg-white/10" aria-hidden="true" />
             <div className="flex items-center gap-2">
-              <svg className="h-4 w-4 text-indigo-500 dark:text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              <span>100% Hak Milik Source Code</span>
+              <ShieldCheck className="h-4 w-4 text-indigo-500 dark:text-cyan-400" />
+              <span>
+                <strong className="text-slate-900 dark:text-white">100%</strong> Hak Milik Source Code
+              </span>
             </div>
           </div>
         </div>

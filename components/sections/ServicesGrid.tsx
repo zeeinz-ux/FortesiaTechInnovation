@@ -1,4 +1,13 @@
 import React from "react";
+import {
+  Globe,
+  Zap,
+  LayoutDashboard,
+  Smartphone,
+  SearchCheck,
+  Building2,
+  ArrowRight,
+} from "lucide-react";
 import Container from "@/components/ui/Container";
 
 export default function ServicesGrid() {
@@ -7,77 +16,42 @@ export default function ServicesGrid() {
       title: "Jasa Pembuatan Website & Web Portal",
       desc: "Bangun website bisnis modern yang profesional, ringan, dan mudah dikelola. Dirancang dengan UI/UX eksklusif untuk membangun kredibilitas brand Anda di hadapan mitra dan calon pembeli.",
       tags: ["Web Perusahaan", "Portal Berita", "Katalog Online"],
-      icon: (
-        <svg viewBox="0 0 24 24" className="h-6 w-6 fill-none stroke-current" strokeWidth="2">
-          <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-          <line x1="8" y1="21" x2="16" y2="21" />
-          <line x1="12" y1="17" x2="12" y2="21" />
-        </svg>
-      ),
+      icon: <Globe className="h-6 w-6" />,
       waMessage: "Website Bisnis & Portal",
     },
     {
       title: "High-Converting Landing Page",
       desc: "Landing page berorientasi konversi tinggi yang dibuat khusus untuk kampanye iklan Google Ads, TikTok Ads, dan Meta Ads. Loading di bawah 1 detik agar tidak ada calon leads yang mental sebelum membaca penawaran.",
       tags: ["Konversi Iklan", "Ultra Fast Load", "Direct WA CTA"],
-      icon: (
-        <svg viewBox="0 0 24 24" className="h-6 w-6 fill-none stroke-current" strokeWidth="2">
-          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-        </svg>
-      ),
+      icon: <Zap className="h-6 w-6" />,
       waMessage: "Landing Page Konversi Tinggi",
     },
     {
       title: "Custom Web Application",
       desc: "Digitalisasikan operasional internal perusahaan dengan sistem web aplikasi yang aman dan fleksibel. Mulai dari dashboard analytics, ERP kustom, CRM, sistem absensi, hingga inventory gudang.",
       tags: ["ERP / CRM", "SaaS Platform", "Database Complex"],
-      icon: (
-        <svg viewBox="0 0 24 24" className="h-6 w-6 fill-none stroke-current" strokeWidth="2">
-          <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-          <line x1="3" y1="9" x2="21" y2="9" />
-          <line x1="9" y1="21" x2="9" y2="9" />
-        </svg>
-      ),
+      icon: <LayoutDashboard className="h-6 w-6" />,
       waMessage: "Custom Web Application (ERP/CRM)",
     },
     {
       title: "Aplikasi Mobile Android & iOS",
       desc: "Pengembangan aplikasi mobile lintas platform (Cross-Platform Flutter / React Native) dengan performa setara native. Antarmuka mulus 60 FPS, konsumsi baterai efisien, dan siap rilis ke Play Store & App Store.",
       tags: ["Flutter & Dart", "Play Store & App Store", "Push Notification"],
-      icon: (
-        <svg viewBox="0 0 24 24" className="h-6 w-6 fill-none stroke-current" strokeWidth="2">
-          <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
-          <line x1="12" y1="18" x2="12.01" y2="18" />
-        </svg>
-      ),
+      icon: <Smartphone className="h-6 w-6" />,
       waMessage: "Aplikasi Mobile Android & iOS",
     },
     {
       title: "Layanan Optimasi SEO Indonesia",
       desc: "Raih posisi puncak di hasil pencarian Google tanpa ketergantungan iklan berbayar terus-menerus. Meliputi riset kata kunci komersial, optimasi teknis Core Web Vitals, Schema.org, dan audit On-Page terstruktur.",
       tags: ["Technical SEO", "Keyword Research ID", "Schema Markup"],
-      icon: (
-        <svg viewBox="0 0 24 24" className="h-6 w-6 fill-none stroke-current" strokeWidth="2">
-          <circle cx="11" cy="11" r="8" />
-          <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          <line x1="11" y1="8" x2="11" y2="14" />
-          <line x1="8" y1="11" x2="14" y2="11" />
-        </svg>
-      ),
+      icon: <SearchCheck className="h-6 w-6" />,
       waMessage: "Jasa Optimasi SEO",
     },
     {
       title: "Website Company Profile Korporat",
       desc: "Tampilkan identitas, visi, portofolio, dan legalitas perusahaan Anda secara berkelas. Standar terbaik untuk memenangkan tender B2B, meyakinkan calon investor, dan membangun reputasi korporasi di tingkat nasional.",
       tags: ["Profil Korporasi", "Tender & B2B Ready", "Desain Elegan"],
-      icon: (
-        <svg viewBox="0 0 24 24" className="h-6 w-6 fill-none stroke-current" strokeWidth="2">
-          <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-          <circle cx="8.5" cy="7" r="4" />
-          <line x1="20" y1="8" x2="20" y2="14" />
-          <line x1="23" y1="11" x2="17" y2="11" />
-        </svg>
-      ),
+      icon: <Building2 className="h-6 w-6" />,
       waMessage: "Website Company Profile Korporat",
     },
   ];
@@ -141,7 +115,7 @@ export default function ServicesGrid() {
                     className="inline-flex items-center gap-2 text-sm font-bold text-indigo-600 hover:text-indigo-700 dark:text-purple-400 dark:hover:text-purple-300"
                   >
                     <span>Konsultasikan Layanan Ini</span>
-                    <span aria-hidden="true">→</span>
+                    <ArrowRight className="h-4 w-4" />
                   </a>
                 </div>
               </article>

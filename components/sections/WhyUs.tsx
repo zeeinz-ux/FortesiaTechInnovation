@@ -1,25 +1,30 @@
 import React from "react";
+import { Boxes, Zap, KeyRound, LifeBuoy } from "lucide-react";
 import Container from "@/components/ui/Container";
 
 export default function WhyUs() {
   const pillars = [
     {
       num: "01",
+      icon: <Boxes className="h-5 w-5 text-indigo-500 dark:text-cyan-400" />,
       title: "Bukan Template Pasaran",
       desc: "Kami menyusun kode dan desain secara khusus sesuai karakter brand dan kebutuhan fungsional Anda. Tidak ada kode sampah atau plugin berbahaya yang membebani server.",
     },
     {
       num: "02",
+      icon: <Zap className="h-5 w-5 text-indigo-500 dark:text-cyan-400" />,
       title: "Kecepatan Muat < 1 Detik",
       desc: "Pengunjung internet di Indonesia tidak suka menunggu. Kami memastikan aset teroptimasi, minim dependensi, dan langsung tampil seketika saat diakses dari smartphone.",
     },
     {
       num: "03",
+      icon: <KeyRound className="h-5 w-5 text-indigo-500 dark:text-cyan-400" />,
       title: "100% Hak Milik Source Code",
       desc: "Seluruh kode sumber, desain UI/UX, dan akun server diserahkan sepenuhnya kepada Anda. Tanpa ada sistem ikatan sewa sepihak (no vendor lock-in).",
     },
     {
       num: "04",
+      icon: <LifeBuoy className="h-5 w-5 text-indigo-500 dark:text-cyan-400" />,
       title: "Dukungan & Garansi Purna Jual",
       desc: "Kami tidak menghilang setelah website selesai. Kami memberikan periode garansi perbaikan bug gratis serta pendampingan teknis agar operasional bisnis Anda tetap lancar.",
     },
@@ -42,16 +47,23 @@ export default function WhyUs() {
 
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {pillars.map((pillar) => (
-            <div key={pillar.num} className="glass-panel rounded-2xl p-6 sm:p-7">
-              <div className="mb-4 text-4xl font-black text-indigo-600/30 dark:text-purple-500/30">
-                {pillar.num}
+            <div key={pillar.num} className="glass-panel flex flex-col justify-between rounded-2xl p-6 sm:p-7">
+              <div>
+                <div className="mb-4 flex items-center justify-between">
+                  <span className="text-3xl font-black text-slate-300 dark:text-white/20">
+                    {pillar.num}
+                  </span>
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500/10 dark:bg-white/5">
+                    {pillar.icon}
+                  </div>
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+                  {pillar.title}
+                </h3>
+                <p className="mt-2.5 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                  {pillar.desc}
+                </p>
               </div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                {pillar.title}
-              </h3>
-              <p className="mt-2.5 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                {pillar.desc}
-              </p>
             </div>
           ))}
         </div>
