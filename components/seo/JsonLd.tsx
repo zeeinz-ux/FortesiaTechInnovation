@@ -13,7 +13,7 @@ export default function JsonLd() {
         "description":
           "Software house dan partner rekayasa perangkat lunak terpercaya di Indonesia: jasa pembuatan website perusahaan, landing page konversi tinggi, web app kustom, aplikasi mobile Android & iOS, dan optimasi SEO.",
         "telephone": "+6285893861418",
-        "email": "halo@fortesiatech.com",
+        "email": "fortesiatechinnovation@gmail.com",
         "contactPoint": {
           "@type": "ContactPoint",
           "telephone": "+6285893861418",

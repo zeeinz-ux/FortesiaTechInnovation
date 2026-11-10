@@ -17,6 +17,7 @@ export default function Header() {
   }, []);
 
   const navLinks = [
+    { label: "Home", href: "#" },
     { label: "Layanan", href: "#layanan" },
     { label: "Kapabilitas", href: "#kapabilitas" },
     { label: "Keunggulan", href: "#keunggulan" },
@@ -25,16 +26,16 @@ export default function Header() {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pointer-events-none transition-all duration-300">
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
       <div
-        className={`pointer-events-auto flex items-center justify-between transition-all duration-500 ${
+        className={`pointer-events-auto flex items-center justify-between transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           scrolled
-            ? "mt-4 w-[92%] md:w-auto md:gap-10 rounded-full border border-slate-200/80 bg-white/80 px-6 py-2.5 shadow-2xl backdrop-blur-md dark:border-white/[0.12] dark:bg-[#07070e]/85"
-            : "w-full max-w-7xl px-6 py-5 rounded-none border-transparent bg-transparent"
+            ? "mt-4 w-[92%] md:w-auto md:gap-10 rounded-full border border-slate-200/90 bg-white/90 px-6 py-2.5 shadow-xl backdrop-blur-md dark:border-white/[0.12] dark:bg-[#07070e]/85 dark:shadow-2xl"
+            : "w-full max-w-7xl px-6 py-5 rounded-none border-transparent bg-transparent mt-0 md:w-full"
         }`}
       >
         {/* Logo Brand */}
-        <a href="#" className="flex items-center gap-3" aria-label="Fortesia Tech Innovation">
+        <a href="#" className="flex items-center gap-3 transition-opacity hover:opacity-85" aria-label="Fortesia Tech Innovation">
           <img
             src="/logo.svg"
             alt="Logo Fortesia Tech Innovation"
@@ -45,12 +46,12 @@ export default function Header() {
         </a>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Navigasi Menu">
+        <nav className="hidden items-center gap-7 md:flex" aria-label="Navigasi Menu">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="text-sm font-medium text-slate-600 transition-colors hover:text-indigo-600 dark:text-slate-300 dark:hover:text-purple-400"
+              className="text-sm font-semibold text-slate-700 transition-colors hover:text-indigo-600 dark:text-slate-200 dark:hover:text-purple-400"
             >
               {link.label}
             </a>

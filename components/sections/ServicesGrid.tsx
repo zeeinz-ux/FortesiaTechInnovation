@@ -9,6 +9,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import Container from "@/components/ui/Container";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function ServicesGrid() {
   const services = [
@@ -59,20 +60,23 @@ export default function ServicesGrid() {
   return (
     <section className="py-20 md:py-28" id="layanan">
       <Container>
-        <div className="mx-auto max-w-3xl text-center">
+        <ScrollReveal className="mx-auto max-w-3xl text-center">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-4 py-1.5 text-xs font-semibold text-indigo-700 dark:border-purple-500/30 dark:bg-purple-500/15 dark:text-purple-300">
             Katalog Layanan Digital
           </div>
-          <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl dark:text-white">
+          <h2
+            className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl dark:text-white"
+            style={{ fontFamily: "'Playfair Display', serif" }}
+          >
             Solusi Rekayasa Digital untuk Pertumbuhan Bisnis
           </h2>
-          <p className="mt-4 text-base text-slate-600 dark:text-slate-300">
+          <p className="mt-4 text-base text-slate-700 dark:text-slate-300">
             Kami tidak menjual website template instan yang berat dan pasaran. Setiap baris kode dirancang spesifik untuk mendukung model bisnis, brand identity, dan performa konversi Anda.
           </p>
-        </div>
+        </ScrollReveal>
 
         <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((item) => {
+          {services.map((item, idx) => {
             const waHref =
               "https://wa.me/6285893861418?text=" +
               encodeURIComponent(
@@ -80,45 +84,44 @@ export default function ServicesGrid() {
               );
 
             return (
-              <article
-                key={item.title}
-                className="glass-panel flex flex-col justify-between rounded-2xl p-6 sm:p-8"
-              >
-                <div>
-                  <div className="mb-5 flex h-13 w-13 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-600 transition-transform group-hover:scale-105 dark:bg-purple-500/15 dark:text-purple-400">
-                    {item.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                    {item.desc}
-                  </p>
-                </div>
-
-                <div className="mt-6 border-t border-slate-200/60 pt-5 dark:border-white/5">
-                  <div className="mb-5 flex flex-wrap gap-1.5">
-                    {item.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600 dark:bg-white/5 dark:text-slate-300"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+              <ScrollReveal key={item.title} delay={idx * 0.08}>
+                <article className="glass-panel flex h-full flex-col justify-between rounded-2xl p-6 sm:p-8">
+                  <div>
+                    <div className="mb-5 flex h-13 w-13 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-600 transition-transform hover:scale-105 dark:bg-purple-500/15 dark:text-purple-400">
+                      {item.icon}
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-950 dark:text-white">
+                      {item.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+                      {item.desc}
+                    </p>
                   </div>
 
-                  <a
-                    href={waHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-bold text-indigo-600 hover:text-indigo-700 dark:text-purple-400 dark:hover:text-purple-300"
-                  >
-                    <span>Konsultasikan Layanan Ini</span>
-                    <ArrowRight className="h-4 w-4" />
-                  </a>
-                </div>
-              </article>
+                  <div className="mt-6 border-t border-slate-200/80 pt-5 dark:border-white/5">
+                    <div className="mb-5 flex flex-wrap gap-1.5">
+                      {item.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-700 dark:bg-white/5 dark:text-slate-300"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    <a
+                      href={waHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm font-bold text-indigo-600 hover:text-indigo-700 dark:text-purple-400 dark:hover:text-purple-300"
+                    >
+                      <span>Konsultasikan Layanan Ini</span>
+                      <ArrowRight className="h-4 w-4" />
+                    </a>
+                  </div>
+                </article>
+              </ScrollReveal>
             );
           })}
         </div>

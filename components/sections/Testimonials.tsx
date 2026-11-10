@@ -1,6 +1,7 @@
 import React from "react";
 import { Quote } from "lucide-react";
 import Container from "@/components/ui/Container";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function Testimonials() {
   const reviews = [
@@ -30,49 +31,50 @@ export default function Testimonials() {
   return (
     <section className="py-20 md:py-28">
       <Container>
-        <div className="mx-auto max-w-3xl text-center">
+        <ScrollReveal className="mx-auto max-w-3xl text-center">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-4 py-1.5 text-xs font-semibold text-indigo-700 dark:border-purple-500/30 dark:bg-purple-500/15 dark:text-purple-300">
             Bukti Kepercayaan
           </div>
-          <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl dark:text-white">
+          <h2
+            className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl dark:text-white"
+            style={{ fontFamily: "'Playfair Display', serif" }}
+          >
             Apa Kata Mereka yang Telah Bekerja Sama?
           </h2>
-          <p className="mt-4 text-base text-slate-600 dark:text-slate-300">
+          <p className="mt-4 text-base text-slate-700 dark:text-slate-300">
             Keberhasilan produk digital Anda adalah tolak ukur reputasi kami.
           </p>
-        </div>
+        </ScrollReveal>
 
         <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {reviews.map((rev) => (
-            <div
-              key={rev.name}
-              className="glass-panel flex flex-col justify-between rounded-2xl p-6 sm:p-8"
-            >
-              <div>
-                <Quote className="h-6 w-6 text-indigo-500/40 dark:text-purple-400/40" />
-                <p className="mt-3 text-sm leading-relaxed text-slate-700 italic dark:text-slate-300">
-                  {rev.quote}
-                </p>
-              </div>
-
-              <div className="mt-6 flex items-center gap-3 border-t border-slate-200/60 pt-4 dark:border-white/5">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 text-xs font-bold text-white">
-                  {rev.avatar}
-                </div>
+          {reviews.map((rev, idx) => (
+            <ScrollReveal key={rev.name} delay={idx * 0.1}>
+              <div className="glass-panel flex h-full flex-col justify-between rounded-2xl p-6 sm:p-8">
                 <div>
-                  <div className="text-sm font-bold text-slate-900 dark:text-white">
-                    {rev.name}
+                  <Quote className="h-6 w-6 text-indigo-500/50 dark:text-purple-400/40" />
+                  <p className="mt-3 text-sm leading-relaxed text-slate-800 italic dark:text-slate-300">
+                    "{rev.quote}"
+                  </p>
+                </div>
+
+                <div className="mt-6 flex items-center gap-3 border-t border-slate-200/80 pt-4 dark:border-white/5">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 text-xs font-bold text-white shadow-sm">
+                    {rev.avatar}
                   </div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400">
-                    {rev.role}
+                  <div>
+                    <div className="text-sm font-bold text-slate-950 dark:text-white">
+                      {rev.name}
+                    </div>
+                    <div className="text-xs font-medium text-slate-600 dark:text-slate-400">
+                      {rev.role}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </Container>
     </section>
   );
 }
-

@@ -118,10 +118,10 @@ export default function Footer() {
               <div className="flex items-center gap-2.5">
                 <Mail className="h-4 w-4 text-indigo-500 dark:text-cyan-400" />
                 <a
-                  href="mailto:halo@fortesiatech.com"
-                  className="hover:text-indigo-600 dark:hover:text-purple-400"
+                  href="mailto:fortesiatechinnovation@gmail.com"
+                  className="font-medium text-slate-800 hover:text-indigo-600 dark:text-slate-200 dark:hover:text-purple-400"
                 >
-                  halo@fortesiatech.com
+                  fortesiatechinnovation@gmail.com
                 </a>
               </div>
               <div className="flex items-start gap-2.5">

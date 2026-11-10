@@ -1,9 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400;1,600&display=swap');
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --color-brand-purple: #8b5cf6;
   --color-brand-indigo: #6366f1;
   --color-brand-cyan: #38bdf8;
@@ -17,8 +19,8 @@
   --bg-card-hover: #f1f5f9;
   --border-color: #e2e8f0;
   --border-hover: rgba(99, 102, 241, 0.3);
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
+  --text-primary: #09090b;
+  --text-secondary: #334155;
   --text-muted: #64748b;
   --shadow-soft: 0 4px 24px -2px rgba(99, 102, 241, 0.07);
   --shadow-hover: 0 10px 30px -4px rgba(99, 102, 241, 0.15);
