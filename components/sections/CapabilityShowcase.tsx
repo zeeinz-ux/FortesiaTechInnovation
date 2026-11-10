@@ -123,7 +123,7 @@ export default function CapabilityShowcase() {
                 <div className="group relative flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 border-t border-slate-200/90 py-8 dark:border-white/10">
                   {/* Category Identifier */}
                   <div className="flex sm:flex-col items-baseline sm:items-start gap-3 sm:gap-0 sm:w-40 shrink-0">
-                    <span className="text-3xl sm:text-4xl font-light text-slate-400 transition-colors group-hover:text-indigo-600 dark:text-white/25 dark:group-hover:text-purple-400">
+                    <span className="text-3xl sm:text-4xl font-light text-slate-500 transition-colors group-hover:text-indigo-600 dark:text-white/40 dark:group-hover:text-purple-400">
                       {cat.number}
                     </span>
                     <h3 className="text-lg sm:text-xl font-bold tracking-tight text-slate-950 dark:text-white">

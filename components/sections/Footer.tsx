@@ -130,7 +130,7 @@ export default function Footer() {
         </div>
 
         {/* Footer Bottom */}
-        <div className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-slate-200/80 pt-8 text-xs text-slate-500 dark:border-white/5 dark:text-slate-400">
+        <div className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-slate-200/80 pt-8 text-xs text-slate-600 dark:border-white/5 dark:text-slate-400">
           <div>
             &copy; {currentYear} <strong>Fortesia Tech Innovation</strong>. All rights reserved.
           </div>

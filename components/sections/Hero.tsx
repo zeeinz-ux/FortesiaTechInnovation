@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import dynamic from "next/dynamic";
 import { Star, ShieldCheck, Activity, ChevronDown, Code2 } from "lucide-react";
 import Container from "@/components/ui/Container";
@@ -9,40 +9,7 @@ const ThreeHeroCanvas = dynamic(() => import("@/components/ui/ThreeHeroCanvas"),
   ssr: false,
 });
 
-/**
- * Only pull in three.js (~550 KiB) when the browser can actually render WebGL on the GPU.
- * Headless Chrome / Lighthouse / VMs fall back to SwiftShader or llvmpipe, where the
- * animation is both slow and pointless — they get the CSS-only hero instead.
- */
-function canUseHardwareWebGL() {
-  try {
-    const canvas = document.createElement("canvas");
-    const gl = (canvas.getContext("webgl2") ||
-      canvas.getContext("webgl")) as WebGLRenderingContext | null;
-    if (!gl) return false;
-
-    const debugInfo = gl.getExtension("WEBGL_debug_renderer_info");
-    const renderer = debugInfo
-      ? String(gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL))
-      : "";
-
-    gl.getExtension("WEBGL_lose_context")?.loseContext();
-
-    return !/swiftshader|llvmpipe|softpipe|software|basic render|mesa offscreen/i.test(renderer);
-  } catch {
-    return false;
-  }
-}
-
 export default function Hero() {
-  const [enable3D, setEnable3D] = useState(false);
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (!canUseHardwareWebGL()) return;
-    setEnable3D(true);
-  }, []);
-
   const waUrl =
     "https://wa.me/6285129792711?text=" +
     encodeURIComponent(
@@ -51,8 +18,8 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-[88vh] flex items-center justify-center overflow-hidden pt-28 pb-16 md:pt-36 md:pb-24" id="home">
-      {/* 3D Interactive WebGL Torus Knot Background (hardware WebGL only) */}
-      {enable3D && <ThreeHeroCanvas />}
+      {/* 3D WebGL Torus Knot: animated on real GPUs, one static frame otherwise */}
+      <ThreeHeroCanvas />
 
       {/* Subtle Grid Overlay - Confined to Hero with Smooth Bottom Fade (Matches Zeinz Woven Light Hero) */}
       <div

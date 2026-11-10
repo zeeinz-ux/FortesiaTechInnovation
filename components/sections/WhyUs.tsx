@@ -55,7 +55,7 @@ export default function WhyUs() {
               <div className="glass-panel flex h-full flex-col justify-between rounded-2xl p-6 sm:p-7">
                 <div>
                   <div className="mb-4 flex items-center justify-between">
-                    <span className="text-3xl font-black text-slate-400 dark:text-white/20">
+                    <span className="text-3xl font-black text-slate-500 dark:text-white/40">
                       {pillar.num}
                     </span>
                     <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500/10 dark:bg-white/5">
