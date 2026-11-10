@@ -1,20 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect } from "react";
-import {
-  BufferAttribute,
-  BufferGeometry,
-  Clock,
-  Color,
-  NormalBlending,
-  PerspectiveCamera,
-  Points,
-  PointsMaterial,
-  Scene,
-  TorusKnotGeometry,
-  Vector3,
-  WebGLRenderer,
-} from "three";
+import * as THREE from "three";
 
 export default function ThreeHeroCanvas() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -24,17 +11,14 @@ export default function ThreeHeroCanvas() {
     if (!container) return;
 
     const isMobile = window.innerWidth < 768;
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    // Keep the per-frame CPU cost low enough to stay under the 50ms long-task threshold.
-    const particleCount = isMobile ? 4000 : 9000;
+    // Dense particle count matching the wide scope around the hero headline
+    const particleCount = isMobile ? 10000 : 22000;
 
     const getIsDark = () => document.documentElement.classList.contains("dark");
 
     // Scene & Camera
-    const scene = new Scene();
-    const camera = new PerspectiveCamera(
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(
       72,
       container.clientWidth / container.clientHeight,
       0.1,
@@ -42,50 +26,40 @@ export default function ThreeHeroCanvas() {
     );
     camera.position.z = 4.8;
 
-    let renderer: WebGLRenderer;
+    // WebGL Renderer
+    let renderer: THREE.WebGLRenderer;
     try {
-      renderer = new WebGLRenderer({
+      renderer = new THREE.WebGLRenderer({
         alpha: true,
-        antialias: false,
+        antialias: !isMobile,
         powerPreference: "high-performance",
       });
     } catch {
-      // No WebGL support: keep the CSS-only hero.
       return;
     }
 
     renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 1.25));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 1.5));
     container.appendChild(renderer.domElement);
 
-    // Software WebGL (headless Chrome / Lighthouse / VMs) renders this on the CPU and
-    // cannot sustain animation. Show a single static frame instead of blocking the main thread.
-    let isSoftwareRenderer = false;
-    try {
-      const gl = renderer.getContext();
-      const debugInfo = gl.getExtension("WEBGL_debug_renderer_info");
-      const rendererName = debugInfo
-        ? String(gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL))
-        : "";
-      isSoftwareRenderer = /swiftshader|llvmpipe|software|basic render/i.test(rendererName);
-    } catch {
-      /* ignore */
-    }
-    const animateEnabled = !prefersReducedMotion && !isSoftwareRenderer;
+    const mouse = { x: -9999, y: -9999 };
+    let hasMouseInteraction = false;
+    let idleTimer: ReturnType<typeof setTimeout> | null = null;
+    const clock = new THREE.Clock();
 
-    // Geometry buffers
+    // Geometry: Expanded TorusKnot matching the wide scope from user
     const positions = new Float32Array(particleCount * 3);
     const originalPositions = new Float32Array(particleCount * 3);
     const velocities = new Float32Array(particleCount * 3);
     const colors = new Float32Array(particleCount * 3);
 
-    const geometry = new BufferGeometry();
-    const knot = new TorusKnotGeometry(1.65, 0.52, 200, 32);
+    const geometry = new THREE.BufferGeometry();
+    const knot = new THREE.TorusKnotGeometry(1.65, 0.52, 200, 32);
     const knotPositions = knot.attributes.position;
-    const scratchColor = new Color();
+    const scratchColor = new THREE.Color();
 
-    const positionAttribute = new BufferAttribute(positions, 3);
-    const colorAttribute = new BufferAttribute(colors, 3);
+    const positionAttribute = new THREE.BufferAttribute(positions, 3);
+    const colorAttribute = new THREE.BufferAttribute(colors, 3);
     geometry.setAttribute("position", positionAttribute);
     geometry.setAttribute("color", colorAttribute);
 
@@ -114,32 +88,26 @@ export default function ThreeHeroCanvas() {
       originalPositions[i * 3] = x;
       originalPositions[i * 3 + 1] = y;
       originalPositions[i * 3 + 2] = z;
+
+      velocities[i * 3] = 0;
+      velocities[i * 3 + 1] = 0;
+      velocities[i * 3 + 2] = 0;
     }
 
     let isDark = getIsDark();
     updateColors(isDark);
 
-    const material = new PointsMaterial({
+    const material = new THREE.PointsMaterial({
       size: isMobile ? 0.024 : 0.021,
       vertexColors: true,
-      blending: NormalBlending,
+      blending: THREE.NormalBlending,
       transparent: true,
       opacity: isDark ? 0.75 : 0.52,
     });
 
-    const particles = new Points(geometry, material);
+    const particles = new THREE.Points(geometry, material);
+    particles.position.set(0, 0, 0);
     scene.add(particles);
-
-    const applyRotation = (elapsed: number) => {
-      particles.rotation.y = elapsed * 0.05;
-      particles.rotation.x = Math.sin(elapsed * 0.03) * 0.06;
-      particles.rotation.z = Math.cos(elapsed * 0.02) * 0.04;
-    };
-
-    const renderStaticFrame = () => {
-      particles.rotation.set(0.12, 0.35, 0.04);
-      renderer.render(scene, camera);
-    };
 
     // Theme observer
     const themeObserver = new MutationObserver(() => {
@@ -147,30 +115,23 @@ export default function ThreeHeroCanvas() {
       material.opacity = isDark ? 0.75 : 0.52;
       material.needsUpdate = true;
       updateColors(isDark);
-      if (!animateEnabled) renderStaticFrame();
     });
     themeObserver.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ["class"],
     });
 
-    // Mouse tracking (only meaningful while animating)
-    const mouse = { x: -9999, y: -9999 };
-    let hasMouseInteraction = false;
-    let particlesDisplaced = false;
-    let idleTimer: ReturnType<typeof setTimeout> | null = null;
-
+    // Mouse tracking across window
     const onMouseMove = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
       mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
       hasMouseInteraction = true;
-      particlesDisplaced = true;
 
       if (idleTimer) clearTimeout(idleTimer);
       idleTimer = setTimeout(() => {
         hasMouseInteraction = false;
-      }, 1200);
+      }, 1500);
     };
 
     const onMouseLeave = () => {
@@ -179,7 +140,7 @@ export default function ThreeHeroCanvas() {
       hasMouseInteraction = false;
     };
 
-    if (animateEnabled && !isMobile) {
+    if (!isMobile) {
       window.addEventListener("mousemove", onMouseMove, { passive: true });
       window.addEventListener("mouseleave", onMouseLeave, { passive: true });
     }
@@ -191,18 +152,17 @@ export default function ThreeHeroCanvas() {
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
-      if (!animateEnabled) renderStaticFrame();
     };
     window.addEventListener("resize", onResize, { passive: true });
 
-    // Pre-allocated vectors for the physics loop (zero GC allocations)
-    const mouseWorld = new Vector3();
-    const mouseLocal = new Vector3();
-    const currentPos = new Vector3();
-    const origPos = new Vector3();
-    const velVec = new Vector3();
-    const dirVec = new Vector3();
-    const springVec = new Vector3();
+    // Pre-allocated vectors for physics loop (zero GC allocations)
+    const mouseWorld = new THREE.Vector3();
+    const mouseLocal = new THREE.Vector3();
+    const currentPos = new THREE.Vector3();
+    const origPos = new THREE.Vector3();
+    const velVec = new THREE.Vector3();
+    const dirVec = new THREE.Vector3();
+    const springVec = new THREE.Vector3();
 
     let animationFrameId = 0;
     let isVisible = true;
@@ -212,30 +172,32 @@ export default function ThreeHeroCanvas() {
       ([entry]) => {
         isVisible = entry.isIntersecting;
       },
-      { threshold: 0.1 }
+      { threshold: 0.05 }
     );
     intersectionObserver.observe(container);
 
     const onVisibilityChange = () => {
       isDocumentVisible = !document.hidden;
     };
+    document.addEventListener("visibilitychange", onVisibilityChange);
 
-    const clock = new Clock();
-    let lastFrameTime = 0;
-    const frameInterval = 1000 / 30;
+    let particlesDisplaced = false;
 
+    // Continuous smooth animation loop
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
       if (!isVisible || !isDocumentVisible) return;
 
-      const now = performance.now();
-      if (now - lastFrameTime < frameInterval) return;
-      lastFrameTime = now;
+      const elapsed = clock.getElapsedTime();
 
-      applyRotation(clock.getElapsedTime());
+      // Continuous majestic rotation
+      particles.rotation.y = elapsed * 0.05;
+      particles.rotation.x = Math.sin(elapsed * 0.03) * 0.06;
+      particles.rotation.z = Math.cos(elapsed * 0.02) * 0.04;
+      particles.updateMatrixWorld();
 
-      // Physics repel + elastic return, only while particles are displaced.
-      if (particlesDisplaced) {
+      // Cursor repel physics on desktop
+      if (!isMobile && (hasMouseInteraction || particlesDisplaced)) {
         const vFov = (camera.fov * Math.PI) / 180;
         const planeHalfHeight = Math.tan(vFov / 2) * camera.position.z;
         const planeHalfWidth = planeHalfHeight * camera.aspect;
@@ -258,12 +220,14 @@ export default function ThreeHeroCanvas() {
 
           const dist = currentPos.distanceTo(mouseLocal);
 
+          // Particles push AWAY when cursor gets close
           if (hasMouseInteraction && dist < repelRadius) {
             const force = (repelRadius - dist) * 0.018;
             dirVec.subVectors(currentPos, mouseLocal).normalize();
             velVec.add(dirVec.multiplyScalar(force));
           }
 
+          // Spring force pulling back to original geometry
           springVec.subVectors(origPos, currentPos).multiplyScalar(0.0035);
           velVec.add(springVec);
           velVec.multiplyScalar(0.92);
@@ -280,21 +244,13 @@ export default function ThreeHeroCanvas() {
         }
 
         positionAttribute.needsUpdate = true;
-
-        if (!hasMouseInteraction && totalMovement < 0.005) {
-          particlesDisplaced = false;
-        }
+        particlesDisplaced = totalMovement > 0.005;
       }
 
       renderer.render(scene, camera);
     };
 
-    if (animateEnabled) {
-      document.addEventListener("visibilitychange", onVisibilityChange);
-      animate();
-    } else {
-      renderStaticFrame();
-    }
+    animate();
 
     return () => {
       cancelAnimationFrame(animationFrameId);
