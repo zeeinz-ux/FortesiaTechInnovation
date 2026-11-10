@@ -1,11 +1,17 @@
+"use client";
+
 import React from "react";
+import dynamic from "next/dynamic";
 import { Star, ShieldCheck, Activity, ChevronDown, Code2 } from "lucide-react";
 import Container from "@/components/ui/Container";
-import ThreeHeroCanvas from "@/components/ui/ThreeHeroCanvas";
+
+const ThreeHeroCanvas = dynamic(() => import("@/components/ui/ThreeHeroCanvas"), {
+  ssr: false,
+});
 
 export default function Hero() {
   const waUrl =
-    "https://wa.me/6285893861418?text=" +
+    "https://wa.me/6285129792711?text=" +
     encodeURIComponent(
       "Halo Fortesia Tech Innovation, saya ingin konsultasi mengenai pembuatan website / aplikasi digital kami."
     );

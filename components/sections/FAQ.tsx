@@ -27,7 +27,7 @@ export default function FAQ() {
     },
     {
       q: "Bagaimana cara memulai konsultasi pertama saya?",
-      a: "Sangat mudah! Cukup klik tombol WhatsApp yang tertera atau hubungi nomor +62 858-9386-1418. Ceritakan ide atau permasalahan website/aplikasi Anda, dan tim kami akan segera membalas dengan rekomendasi solusi teknis dan estimasi langkah berikutnya.",
+      a: "Sangat mudah! Cukup klik tombol WhatsApp yang tertera atau hubungi nomor +62 851-2979-2711. Ceritakan ide atau permasalahan website/aplikasi Anda, dan tim kami akan segera membalas dengan rekomendasi solusi teknis dan estimasi langkah berikutnya.",
     },
   ];
 

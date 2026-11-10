@@ -99,7 +99,7 @@ export default function Header() {
           <ThemeToggle />
 
           <a
-            href="https://wa.me/6285893861418?text=Halo%20Fortesia%20Tech%20Innovation,%20saya%20ingin%20konsultasi%20mengenai%20proyek%20kami."
+            href="https://wa.me/6285129792711?text=Halo%20Fortesia%20Tech%20Innovation,%20saya%20ingin%20konsultasi%20mengenai%20proyek%20kami."
             target="_blank"
             rel="noopener noreferrer"
             className="btn-tactile hidden items-center gap-2 rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 px-5 py-2 text-xs font-bold text-white shadow-md shadow-indigo-500/20 transition-all hover:brightness-110 sm:inline-flex"
@@ -146,7 +146,7 @@ export default function Header() {
             })}
             <div className="pt-2">
               <a
-                href="https://wa.me/6285893861418?text=Halo%20Fortesia%20Tech%20Innovation,%20saya%20ingin%20konsultasi%20proyek."
+                href="https://wa.me/6285129792711?text=Halo%20Fortesia%20Tech%20Innovation,%20saya%20ingin%20konsultasi%20proyek."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] py-3 text-center text-sm font-bold text-slate-950 shadow-md"

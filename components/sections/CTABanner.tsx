@@ -101,7 +101,7 @@ export default function CTABanner() {
 
     // Send formatted message directly to WhatsApp
     const text = `Halo Fortesia Tech Innovation,\n\nNama: ${name}\nEmail: ${email}\nPesan: ${message}`;
-    const waUrl = `https://wa.me/6285893861418?text=${encodeURIComponent(text)}`;
+    const waUrl = `https://wa.me/6285129792711?text=${encodeURIComponent(text)}`;
     window.open(waUrl, "_blank");
 
     setSentSuccess(true);
@@ -283,7 +283,7 @@ export default function CTABanner() {
 
               {/* WhatsApp Me */}
               <a
-                href="https://wa.me/6285893861418"
+                href="https://wa.me/6285129792711"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-tactile inline-flex items-center gap-2.5 rounded-full border border-slate-300 bg-white/80 px-6 py-3 text-xs font-bold text-slate-800 shadow-sm backdrop-blur-md hover:border-emerald-400 hover:bg-slate-50 dark:border-white/10 dark:bg-white/[0.05] dark:text-white dark:hover:bg-white/[0.1]"

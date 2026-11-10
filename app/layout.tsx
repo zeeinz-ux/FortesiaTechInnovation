@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/sections/Header";
 import Footer from "@/components/sections/Footer";
@@ -6,11 +7,25 @@ import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 import JsonLd from "@/components/seo/JsonLd";
 import LoadingScreen from "@/components/ui/LoadingScreen";
 
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+  weight: ["300", "400", "500", "600", "700", "800"],
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  display: "swap",
+  weight: ["600", "700", "800"],
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://fortesiatech.com"),
   title: "Fortesia Tech Innovation | Jasa Pembuatan Website, Web App, Mobile App & SEO Indonesia",
   description:
-    "Software house & partner rekayasa digital terpercaya di Indonesia. Jasa pembuatan website perusahaan, landing page konversi tinggi, aplikasi mobile Android/iOS, custom web app, dan optimasi SEO bergaransi. Cepat, aman, dan konsultasi gratis via WhatsApp +62 858-9386-1418.",
+    "Software house & partner rekayasa digital terpercaya di Indonesia. Jasa pembuatan website perusahaan, landing page konversi tinggi, aplikasi mobile Android/iOS, custom web app, dan optimasi SEO bergaransi. Cepat, aman, dan konsultasi gratis via WhatsApp +62 851-2979-2711.",
   keywords: [
     "jasa pembuatan website",
     "jasa bikin landing page",
@@ -28,7 +43,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Fortesia Tech Innovation | Jasa Pembuatan Website, Web App & Mobile App Indonesia",
     description:
-      "Bangun website kencang, aplikasi mobile, dan sistem digital berkinerja tinggi bersama Fortesia Tech Innovation. Konsultasi WhatsApp +62 858-9386-1418.",
+      "Bangun website kencang, aplikasi mobile, dan sistem digital berkinerja tinggi bersama Fortesia Tech Innovation. Konsultasi WhatsApp +62 851-2979-2711.",
     url: "https://fortesiatech.com",
     siteName: "Fortesia Tech Innovation",
     locale: "id_ID",
@@ -46,7 +61,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Fortesia Tech Innovation | Jasa Pembuatan Website, Web App & Mobile App",
     description:
-      "Partner software house terpercaya: web app, mobile app, landing page, dan SEO Indonesia. Hubungi WhatsApp +62 858-9386-1418.",
+      "Partner software house terpercaya: web app, mobile app, landing page, dan SEO Indonesia. Hubungi WhatsApp +62 851-2979-2711.",
     images: ["/og.svg"],
   },
   robots: {
@@ -65,14 +80,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" suppressHydrationWarning>
+    <html lang="id" className={`${inter.variable} ${playfair.variable} scroll-smooth`} suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400;1,600&display=swap"
-          rel="stylesheet"
-        />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{if(localStorage.getItem('theme')){localStorage.removeItem('theme');}var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches;var o=sessionStorage.getItem('theme_override');var isDark=o?(o==='dark'):d;if(isDark){document.documentElement.classList.add('dark');document.documentElement.classList.remove('light');}else{document.documentElement.classList.add('light');document.documentElement.classList.remove('dark');}}catch(e){}})();`,

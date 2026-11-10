@@ -102,12 +102,12 @@ export default function Footer() {
               <div className="flex items-center gap-2.5">
                 <Phone className="h-4 w-4 text-emerald-500" />
                 <a
-                  href="https://wa.me/6285893861418"
+                  href="https://wa.me/6285129792711"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-bold text-slate-900 hover:text-indigo-600 dark:text-white dark:hover:text-purple-400"
                 >
-                  +62 858-9386-1418
+                  +62 851-2979-2711
                 </a>
               </div>
               <div className="flex items-center gap-2.5">

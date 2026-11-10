@@ -12,11 +12,11 @@ export default function JsonLd() {
         "logo": "https://fortesiatech.com/logo.svg",
         "description":
           "Software house dan partner rekayasa perangkat lunak terpercaya di Indonesia: jasa pembuatan website perusahaan, landing page konversi tinggi, web app kustom, aplikasi mobile Android & iOS, dan optimasi SEO.",
-        "telephone": "+6285893861418",
+        "telephone": "+6285129792711",
         "email": "fortesiatechinnovation@gmail.com",
         "contactPoint": {
           "@type": "ContactPoint",
-          "telephone": "+6285893861418",
+          "telephone": "+6285129792711",
           "contactType": "Customer Service",
           "areaServed": "ID",
           "availableLanguage": ["Indonesian", "English"]
@@ -29,7 +29,7 @@ export default function JsonLd() {
         "url": "https://fortesiatech.com/",
         "image": "https://fortesiatech.com/logo.svg",
         "priceRange": "$$",
-        "telephone": "+6285893861418",
+        "telephone": "+6285129792711",
         "address": {
           "@type": "PostalAddress",
           "addressCountry": "ID"

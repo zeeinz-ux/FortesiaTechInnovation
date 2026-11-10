@@ -19,7 +19,7 @@ Dibangun dengan arsitektur **Next.js 15 (App Router)**, **TypeScript**, **Tailwi
 - ⚡ **Performa Ekstrem (< 1 Detik):**
   - Menggunakan Static Site Generation (`output: 'export'`) sehingga langsung terkompilasi jadi HTML murni yang super ringan dan terbaca instan oleh Googlebot.
 - 💬 **Konversi Tanpa Tabel Harga:**
-  - Semua Call-to-Action diarahkan langsung ke WhatsApp resmi **+62 858-9386-1418** dengan parameter pesan pembuka otomatis.
+  - Semua Call-to-Action diarahkan langsung ke WhatsApp resmi **+62 851-2979-2711** dengan parameter pesan pembuka otomatis.
   - Tersedia Floating WhatsApp Action Button di pojok kanan bawah.
 - 📱 **100% Mobile-Friendly & Responsif:**
   - Drawer menu sentuhan satu jempol, tata letak fleksibel di semua ukuran layar smartphone dan desktop.

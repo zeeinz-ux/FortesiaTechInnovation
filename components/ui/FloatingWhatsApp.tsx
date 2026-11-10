@@ -2,7 +2,7 @@ import React from "react";
 
 export default function FloatingWhatsApp() {
   const waUrl =
-    "https://wa.me/6285893861418?text=" +
+    "https://wa.me/6285129792711?text=" +
     encodeURIComponent(
       "Halo Fortesia Tech Innovation, saya ingin konsultasi mengenai pembuatan website / aplikasi digital kami."
     );
@@ -13,7 +13,7 @@ export default function FloatingWhatsApp() {
         href={waUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Konsultasi langsung via WhatsApp +62 858-9386-1418"
+        aria-label="Konsultasi langsung via WhatsApp +62 851-2979-2711"
         className="btn-tactile fixed bottom-6 right-6 z-50 flex items-center gap-2.5 rounded-full bg-[#25D366] px-4 py-3 text-sm font-extrabold text-[#092e16] shadow-lg shadow-emerald-900/30 transition-transform hover:-translate-y-1 hover:bg-[#20bd5a] sm:px-5 sm:py-3.5"
       >
         {/* Pulsing ring */}

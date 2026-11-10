@@ -78,7 +78,7 @@ export default function ServicesGrid() {
         <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {services.map((item, idx) => {
             const waHref =
-              "https://wa.me/6285893861418?text=" +
+              "https://wa.me/6285129792711?text=" +
               encodeURIComponent(
                 `Halo Fortesia Tech Innovation, saya tertarik untuk konsultasi mengenai pembuatan ${item.waMessage}. Bagaimana estimasi timeline dan alurnya?`
               );
