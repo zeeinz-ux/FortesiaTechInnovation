@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/sections/Header";
 import Footer from "@/components/sections/Footer";
@@ -7,18 +7,22 @@ import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 import JsonLd from "@/components/seo/JsonLd";
 import LoadingScreen from "@/components/ui/LoadingScreen";
 
-const inter = Inter({
-  subsets: ["latin"],
+// Variable fonts are vendored in app/fonts so the build never depends on
+// fonts.googleapis.com (that fetch is what intermittently failed on Vercel).
+const inter = localFont({
+  src: "./fonts/Inter-latin-var.woff2",
   variable: "--font-inter",
   display: "swap",
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: "300 800",
+  style: "normal",
 });
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
+const playfair = localFont({
+  src: "./fonts/PlayfairDisplay-latin-var.woff2",
   variable: "--font-playfair",
   display: "swap",
-  weight: ["600", "700", "800"],
+  weight: "600 800",
+  style: "normal",
 });
 
 export const metadata: Metadata = {
