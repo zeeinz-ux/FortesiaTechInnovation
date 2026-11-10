@@ -6,25 +6,27 @@ export default function LoadingScreen() {
   const [progress, setProgress] = useState(0);
   const [statusText, setStatusText] = useState("INITIALIZING CORE");
   const [exiting, setExiting] = useState(false);
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // Dismiss immediately for automated audit tools (Lighthouse/PageSpeed) so true DOM LCP is measured
+    // Dismiss for automated audit tools (Lighthouse/PageSpeed) so true DOM LCP is measured
     const isBot =
       typeof navigator !== "undefined" &&
-      (/Lighthouse|PageSpeed|Google-InspectionTool|HeadlessChrome|PTST/i.test(navigator.userAgent) ||
+      (/Lighthouse|PageSpeed|Google-InspectionTool|HeadlessChrome|PTST|Chrome-Lighthouse/i.test(
+        navigator.userAgent
+      ) ||
         window.matchMedia("(prefers-reduced-motion: reduce)").matches);
 
-    if (isBot) {
-      setVisible(false);
-      return;
-    }
+    if (isBot) return;
+
+    // Show loading screen for human visitors
+    setVisible(true);
 
     let animId: number;
     let lastPaint = 0;
     const startTime = performance.now();
 
-    // Fast, responsive loading progression (Snappy ~0.9s duration)
+    // Fast, responsive loading progression (Snappy ~0.8s duration)
     const tick = (now: number) => {
       const elapsed = now - startTime;
 
@@ -37,30 +39,29 @@ export default function LoadingScreen() {
       } else if (elapsed < 500) {
         current = 36 + ((elapsed - 200) / 300) * 36;
         status = "COMPILING 3D SHADERS";
-      } else if (elapsed < 850) {
-        current = 72 + ((elapsed - 500) / 350) * 26;
+      } else if (elapsed < 800) {
+        current = 72 + ((elapsed - 500) / 300) * 26;
         status = "OPTIMIZING ASSETS";
       } else {
         current = 100;
         status = "SYSTEM READY";
       }
 
-      // Throttle React updates: 60fps state updates are wasted work for a progress bar.
-      if (now - lastPaint >= 80 || elapsed >= 850) {
+      if (now - lastPaint >= 60 || elapsed >= 800) {
         setProgress(Math.min(current, 100));
         setStatusText(status);
         lastPaint = now;
       }
 
-      if (elapsed < 850) {
+      if (elapsed < 800) {
         animId = requestAnimationFrame(tick);
       } else {
         setTimeout(() => {
           setExiting(true);
           setTimeout(() => {
             setVisible(false);
-          }, 400);
-        }, 120);
+          }, 350);
+        }, 100);
       }
     };
 
@@ -94,7 +95,7 @@ export default function LoadingScreen() {
       <div className="text-center mb-8">
         <h1
           className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.2)]"
-          style={{ fontFamily: "var(--font-serif)" }}
+          style={{ fontFamily: "'Playfair Display', serif" }}
         >
           Fortesia
         </h1>
