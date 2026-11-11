@@ -1,62 +1,69 @@
-# 🚀 Fortesia Tech Innovation - Official Landing Page
+# Fortesia Tech Innovation — Official Website
 
-Website landing page resmi untuk **Fortesia Tech Innovation** — Software House & Partner Rekayasa Digital di Indonesia.
+Website resmi **Fortesia Tech Innovation**, software house & partner rekayasa digital di Indonesia (pembuatan website, high-converting landing page, custom web app, aplikasi mobile Android/iOS, dan optimasi SEO).
 
-Dibangun dengan arsitektur **Next.js 15 (App Router)**, **TypeScript**, **Tailwind CSS v4**, serta dilengkapi dukungan **Dark Mode & Light Mode**, **SEO Terstruktur (Schema.org JSON-LD)**, dan siap di-*deploy* secara otomatis ke **GitHub Pages**.
-
----
-
-## 🌟 Fitur Utama
-
-- 🌗 **Dark Mode & Light Mode Switcher:**
-  - *Dark Mode (Default):* Nuansa modern neon violet, indigo, dan obsidian dark (sesuai referensi desain).
-  - *Light Mode:* Tampilan minimalis profesional, bersih, dan kontras tinggi.
-  - Zero-flash blocking theme script (`/public/theme.js`) & tersimpan di `localStorage`.
-- 🔍 **SEO Komprehensif Standar Google Indonesia:**
-  - Riset kata kunci transaksional volume tinggi: Jasa Pembuatan Website, Landing Page Konversi Tinggi, Aplikasi Mobile Android/iOS, Custom Web App, Optimasi SEO, dan Company Profile.
-  - Metadata OpenGraph, Twitter Cards, Canonical URL, `sitemap.xml`, dan `robots.txt`.
-  - Structured Data (Schema.org) `Organization`, `ProfessionalService`, dan `FAQPage`.
-- ⚡ **Performa Ekstrem (< 1 Detik):**
-  - Menggunakan Static Site Generation (`output: 'export'`) sehingga langsung terkompilasi jadi HTML murni yang super ringan dan terbaca instan oleh Googlebot.
-- 💬 **Konversi Tanpa Tabel Harga:**
-  - Semua Call-to-Action diarahkan langsung ke WhatsApp resmi **+62 851-2979-2711** dengan parameter pesan pembuka otomatis.
-  - Tersedia Floating WhatsApp Action Button di pojok kanan bawah.
-- 📱 **100% Mobile-Friendly & Responsif:**
-  - Drawer menu sentuhan satu jempol, tata letak fleksibel di semua ukuran layar smartphone dan desktop.
+Dibangun dengan **Next.js 15 (App Router)**, **React 19**, **TypeScript**, dan **Tailwind CSS v4**, siap di-*deploy* penuh di **Vercel** (termasuk route server untuk asisten AI).
 
 ---
 
-## 🛠️ Menjalankan Proyek di Komputer Lokal
+## Fitur Utama
+
+- **ForteAI Assistant (`ForteAIAssistant` + `ForteAIChatPanel`):**
+  - Maskot interaktif yang berpatroli acak secara halus di dalam area layar aman, dapat di-drag langsung dengan kursor/sentuhan, serta menyapa secara kontekstual sesuai section.
+  - Kolom chat dengan arsitektur hemat token: 4 kartu *Quick Action* (0 token) + pencocokan topik lokal di `lib/forteai-knowledge.ts`, lalu memanggil **Gemini API Free Tier** via `app/api/assistant/route.ts` (default `gemini-3.5-flash-lite`) dengan pembatasan topik khusus layanan Fortesia, rate-limit per IP, dan fallback lokal otomatis bila kuota habis atau API key belum diisi.
+- **Hero 3D Interaktif (`ThreeHeroCanvas`):**
+  - Visualisasi partikel TorusKnot berbasis Three.js dengan *cursor repel* di desktop serta penskalaan kamera dan kepadatan partikel otomatis agar tetap bersih di layar HP.
+- **Identitas Visual Monokrom & Adaptive Theme:**
+  - Logomark geometris `F` Pure Monochrome (`components/ui/Logo.tsx` & `public/favicon.svg`), adaptif otomatis antara Light Mode dan Dark Mode via skrip anti-flash di `app/layout.tsx` (`prefers-color-scheme` + `sessionStorage.theme_override`).
+- **SEO & Jalur Konversi WhatsApp:**
+  - Metadata OpenGraph/Twitter, Schema.org JSON-LD (`Organization`, `ProfessionalService`, `FAQPage`), `public/sitemap.xml`, dan `public/robots.txt`.
+  - Pendekatan konsultasi tanpa daftar harga kaku; seluruh CTA mengarah ke WhatsApp **+62 851-2979-2711**.
+- **Performa & Responsivitas Mobile:**
+  - Font lokal ter-vendor di `app/fonts/` (`Inter` & `Playfair Display`), ikon teknologi self-hosted di `public/icons/tech/`, penyesuaian tata letak saat keyboard virtual HP terbuka (`visualViewport`), serta selalu kembali ke bagian atas halaman saat browser di-refresh.
+
+---
+
+## Menjalankan Proyek di Lokal
 
 ### 1. Install Dependensi
 ```bash
 npm install
 ```
 
-### 2. Jalankan Server Development
+### 2. Konfigurasi Environment (Opsional untuk Gemini AI)
+Salin `.env.example` menjadi `.env` (atau `.env.local`), lalu masukkan API key gratis dari Google AI Studio:
+```env
+GEMINI_API_KEY=isi_api_key_gemini_anda
+GEMINI_MODEL=gemini-3.5-flash-lite
+```
+> **Catatan:** File `.env` / `.env*.local` otomatis diabaikan oleh `.gitignore`. Tanpa `GEMINI_API_KEY`, asisten ForteAI tetap berjalan normal menggunakan basis pengetahuan lokal.
+
+### 3. Jalankan Development Server
 ```bash
 npm run dev
 ```
-Buka browser di [http://localhost:3000](http://localhost:3000).
+Buka [http://localhost:3000](http://localhost:3000).
 
-### 3. Build Static Export (Siap Deploy ke GitHub Pages / Hosting)
+### 4. Verifikasi TypeScript
 ```bash
-npm run build
+npx tsc --noEmit
 ```
-Hasil kompilasi berupa file HTML/CSS/JS statis murni akan berada di dalam folder `/out`.
 
 ---
 
-## 🚀 Alur Deployment ke GitHub Pages
+## Deployment
 
-Proyek ini telah dilengkapi GitHub Actions di `.github/workflows/deploy.yml`. Cukup push kode ke branch `main`:
-```bash
-git add .
-git commit -m "feat: landing page fortesia tech innovation"
-git push origin main
+### Vercel (Direkomendasikan — Produksi Penuh)
+1. Push repository ke GitHub (`master`).
+2. Import proyek di dashboard **Vercel**.
+3. Tambahkan **Environment Variables** pada Project Settings Vercel:
+   - `GEMINI_API_KEY`
+   - `GEMINI_MODEL` (opsional, default `gemini-3.5-flash-lite`)
+4. Deploy — route server `/api/assistant` dan seluruh halaman berjalan penuh secara otomatis.
+
+### Static Export / GitHub Pages (Manual Opsional)
+Build default (`npm run build`) menghasilkan server build Next.js standar (`.next`). Static export ke `./out` hanya aktif apabila `GITHUB_PAGES=true` diset:
+```powershell
+$env:GITHUB_PAGES="true"; npm run build
 ```
-Di repository GitHub Anda:
-1. Buka tab **Settings** > **Pages**.
-2. Pada bagian **Build and deployment** > **Source**, pilih **GitHub Actions**.
-3. Website akan otomatis online dan ter-update setiap kali ada perubahan kode.
-
+Workflow `.github/workflows/deploy.yml` diset ke mode manual (`workflow_dispatch`) agar push ke GitHub tidak memicu build GitHub Pages yang bentrok dengan route API. *(Dalam mode static export murni, `/api/assistant` tidak berjalan sehingga ForteAI memakai balasan lokal.)*

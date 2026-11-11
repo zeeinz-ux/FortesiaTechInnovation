@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/sections/Header";
 import Footer from "@/components/sections/Footer";
 import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
+import ForteAIAssistant from "@/components/ui/ForteAIAssistant";
 import JsonLd from "@/components/seo/JsonLd";
 import LoadingScreen from "@/components/ui/LoadingScreen";
 
@@ -91,6 +92,11 @@ export default function RootLayout({
             __html: `(function(){try{if(localStorage.getItem('theme')){localStorage.removeItem('theme');}var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches;var o=sessionStorage.getItem('theme_override');var isDark=o?(o==='dark'):d;if(isDark){document.documentElement.classList.add('dark');document.documentElement.classList.remove('light');}else{document.documentElement.classList.add('light');document.documentElement.classList.remove('dark');}}catch(e){}})();`,
           }}
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{if('scrollRestoration'in history){history.scrollRestoration='manual';}var nav=performance.getEntriesByType&&performance.getEntriesByType('navigation')[0];if(!window.location.hash||(nav&&nav.type==='reload')){if(window.location.hash){history.replaceState(null,'',window.location.pathname+window.location.search);}var toTop=function(){window.scrollTo({top:0,left:0,behavior:'instant'});};window.scrollTo(0,0);window.addEventListener('DOMContentLoaded',toTop);window.addEventListener('load',function(){toTop();setTimeout(toTop,0);});}}catch(e){}})();`,
+          }}
+        />
       </head>
       <body className="min-h-screen antialiased selection:bg-indigo-500/30 selection:text-indigo-200">
         {/* Skip to Content for Accessibility */}
@@ -112,6 +118,7 @@ export default function RootLayout({
         <main id="konten">{children}</main>
         <Footer />
         <FloatingWhatsApp />
+        <ForteAIAssistant />
       </body>
     </html>
   );

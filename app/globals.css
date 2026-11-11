@@ -986,3 +986,112 @@ body {
     transform: translateX(26px) rotate(360deg);
   }
 }
+
+/* ForteAI Floating Mascot & Orb Animations */
+@keyframes forteai-bob {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes forteai-blink {
+  0%,
+  44%,
+  48%,
+  92%,
+  96%,
+  100% {
+    transform: scaleY(1);
+  }
+  46%,
+  94% {
+    transform: scaleY(0.12);
+  }
+}
+
+@keyframes forteai-orb-spin {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.04);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes forteai-typing-dot {
+  0%,
+  80%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+.forteai-bob {
+  animation: forteai-bob 3.2s ease-in-out infinite;
+}
+
+.forteai-eye-blink {
+  transform-origin: center;
+  animation: forteai-blink 5.2s ease-in-out infinite;
+}
+
+.forteai-orb-spin {
+  animation: forteai-orb-spin 11s linear infinite;
+}
+
+.forteai-typing-dot {
+  animation: forteai-typing-dot 1.2s ease-in-out infinite;
+}
+
+@keyframes forteai-wing-flap-a {
+  0%,
+  100% {
+    transform: rotate(-10deg) scaleX(1) scaleY(1);
+  }
+  50% {
+    transform: rotate(6deg) scaleX(0.76) scaleY(1.04);
+  }
+}
+
+@keyframes forteai-wing-flap-b {
+  0%,
+  100% {
+    transform: rotate(10deg) scaleX(1) scaleY(1);
+  }
+  50% {
+    transform: rotate(-6deg) scaleX(0.78) scaleY(1.04);
+  }
+}
+
+.forteai-wing-left {
+  transform-origin: 90% 60%;
+  animation: forteai-wing-flap-a 0.9s ease-in-out infinite;
+}
+
+.forteai-wing-right {
+  transform-origin: 10% 60%;
+  animation: forteai-wing-flap-b 0.9s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .forteai-bob,
+  .forteai-eye-blink,
+  .forteai-orb-spin,
+  .forteai-typing-dot,
+  .forteai-wing-left,
+  .forteai-wing-right {
+    animation: none !important;
+  }
+}

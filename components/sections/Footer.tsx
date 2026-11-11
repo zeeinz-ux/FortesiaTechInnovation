@@ -12,8 +12,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Col 1: Brand Info */}
           <div>
-            <a href="#home" className="flex items-center gap-3">
-              <Logo className="h-9 w-auto" width="180" height="40" />
+            <a href="#home" className="inline-flex items-center transition-opacity hover:opacity-85">
+              <Logo variant="full" />
             </a>
             <p className="mt-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
               <strong>Fortesia Tech Innovation</strong> adalah mitra rekayasa perangkat lunak dan agensi digital terpercaya di Indonesia yang berdedikasi membangun website berkecepatan tinggi, aplikasi mobile andal, dan strategi SEO organik yang menghasilkan leads nyata.

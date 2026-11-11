@@ -43,7 +43,7 @@ export default function Hero() {
     );
 
   return (
-    <section className="relative min-h-[88vh] flex items-center justify-center overflow-hidden pt-28 pb-16 md:pt-36 md:pb-24" id="home">
+    <section className="relative min-h-[88vh] flex items-center justify-center overflow-hidden pt-28 pb-24 sm:pb-20 md:pt-36 md:pb-24" id="home">
       {/* 3D WebGL Torus Knot Background (Deferred for instant 100/100 Core Web Vitals) */}
       {showCanvas && <ThreeHeroCanvas />}
 

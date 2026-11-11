@@ -5,46 +5,60 @@ import { Menu, X, ArrowRight } from "lucide-react";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import Logo from "@/components/ui/Logo";
 
+const NAV_LINKS = [
+  { label: "Home", id: "home", href: "#home" },
+  { label: "Layanan", id: "layanan", href: "#layanan" },
+  { label: "Kapabilitas", id: "kapabilitas", href: "#kapabilitas" },
+  { label: "Keunggulan", id: "keunggulan", href: "#keunggulan" },
+  { label: "Alur Kerja", id: "alur-kerja", href: "#alur-kerja" },
+  { label: "FAQ", id: "faq", href: "#faq" },
+] as const;
+
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
+  // Track scrolled pill state and active section using viewport trigger line
+  // (immune to tall sections on smaller viewports where ratio thresholds fail).
   useEffect(() => {
-    const handleScroll = () => {
+    let frameId = 0;
+
+    const updateScrollState = () => {
+      frameId = 0;
       setScrolled(window.scrollY > 40);
+
+      const triggerY = Math.max(140, window.innerHeight * 0.35);
+      let current = NAV_LINKS[0].id as string;
+
+      for (const { id } of NAV_LINKS) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        if (el.getBoundingClientRect().top <= triggerY) {
+          current = id;
+        }
+      }
+
+      setActiveSection(current);
     };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
-  const navLinks = [
-    { label: "Home", id: "home", href: "#home" },
-    { label: "Layanan", id: "layanan", href: "#layanan" },
-    { label: "Kapabilitas", id: "kapabilitas", href: "#kapabilitas" },
-    { label: "Keunggulan", id: "keunggulan", href: "#keunggulan" },
-    { label: "Alur Kerja", id: "alur-kerja", href: "#alur-kerja" },
-    { label: "FAQ", id: "faq", href: "#faq" },
-  ];
+    const scheduleUpdate = () => {
+      if (frameId === 0) {
+        frameId = window.requestAnimationFrame(updateScrollState);
+      }
+    };
 
-  // Active section tracking via IntersectionObserver
-  useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-    navLinks.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setActiveSection(id);
-          }
-        },
-        { threshold: 0.25, rootMargin: "-10% 0px -40% 0px" }
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
-    return () => observers.forEach((obs) => obs.disconnect());
+    updateScrollState();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      if (frameId !== 0) {
+        window.cancelAnimationFrame(frameId);
+      }
+    };
   }, []);
 
   const scrollTo = (id: string) => {
@@ -61,18 +75,18 @@ export default function Header() {
             : "w-full max-w-7xl px-6 py-5 rounded-none border-transparent bg-transparent mt-0 md:w-full"
         }`}
       >
-        {/* Logo Brand with dynamic light/dark typography */}
+        {/* Logo Brand with dynamic light/dark monochrome mark */}
         <button
           onClick={() => scrollTo("home")}
-          className="flex items-center gap-2.5 transition-opacity hover:opacity-85 text-left"
+          className="flex items-center transition-opacity hover:opacity-80 text-left"
           aria-label="Fortesia Tech Innovation"
         >
-          <Logo className="h-8.5 w-auto" width="175" height="38" />
+          <Logo variant="compact" />
         </button>
 
         {/* Desktop Navigation Links with Active Scrollspy - Clean colored text only, NO background pill or border */}
         <nav className="hidden items-center gap-7 md:flex" aria-label="Navigasi Menu">
-          {navLinks.map((link) => {
+          {NAV_LINKS.map((link) => {
             const isActive = activeSection === link.id;
             return (
               <a
@@ -124,7 +138,7 @@ export default function Header() {
       {mobileOpen && (
         <div className="pointer-events-auto fixed inset-x-4 top-20 rounded-2xl border border-slate-200/80 bg-white/95 p-6 shadow-2xl backdrop-blur-xl md:hidden dark:border-white/10 dark:bg-[#0c0b1e]/95">
           <nav className="flex flex-col gap-2">
-            {navLinks.map((link) => {
+            {NAV_LINKS.map((link) => {
               const isActive = activeSection === link.id;
               return (
                 <a

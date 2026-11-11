@@ -11,20 +11,40 @@ export default function ThreeHeroCanvas() {
     if (!container) return;
 
     const isMobile = window.innerWidth < 768;
-    // Dense particle count matching the wide scope around the hero headline
-    const particleCount = isMobile ? 10000 : 22000;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Balanced density: crisp nebula around headline on desktop, lighter & cleaner on mobile
+    const particleCount = isMobile ? 4800 : 22000;
 
     const getIsDark = () => document.documentElement.classList.contains("dark");
+
+    const getLayoutParams = (width: number, height: number) => {
+      const aspect = width / Math.max(1, height);
+      const isNarrow = aspect < 1.05;
+      const cameraZ = isNarrow
+        ? Math.min(8.4, Math.max(4.8, 5.25 / Math.sqrt(Math.max(0.38, aspect))))
+        : 4.8;
+      return {
+        aspect,
+        isNarrow,
+        cameraZ,
+        knotY: isNarrow ? 0.32 : 0,
+        pointSize: isNarrow ? 0.0145 : 0.021,
+        opacityDark: isNarrow ? 0.54 : 0.75,
+        opacityLight: isNarrow ? 0.38 : 0.52,
+      };
+    };
+
+    const initialLayout = getLayoutParams(container.clientWidth, container.clientHeight);
 
     // Scene & Camera
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
       72,
-      container.clientWidth / container.clientHeight,
+      initialLayout.aspect,
       0.1,
       1000
     );
-    camera.position.z = 4.8;
+    camera.position.z = initialLayout.cameraZ;
 
     // WebGL Renderer
     let renderer: THREE.WebGLRenderer;
@@ -39,7 +59,7 @@ export default function ThreeHeroCanvas() {
     }
 
     renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 1.5));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     container.appendChild(renderer.domElement);
 
     const mouse = { x: -9999, y: -9999 };
@@ -95,26 +115,30 @@ export default function ThreeHeroCanvas() {
     }
 
     let isDark = getIsDark();
+    let currentLayout = initialLayout;
     updateColors(isDark);
 
     const material = new THREE.PointsMaterial({
-      size: isMobile ? 0.024 : 0.021,
+      size: currentLayout.pointSize,
       vertexColors: true,
       blending: THREE.NormalBlending,
       transparent: true,
-      opacity: isDark ? 0.75 : 0.52,
+      opacity: isDark ? currentLayout.opacityDark : currentLayout.opacityLight,
     });
 
     const particles = new THREE.Points(geometry, material);
-    particles.position.set(0, 0, 0);
+    particles.position.set(0, currentLayout.knotY, 0);
     scene.add(particles);
 
     // Theme observer
     const themeObserver = new MutationObserver(() => {
       isDark = getIsDark();
-      material.opacity = isDark ? 0.75 : 0.52;
+      material.opacity = isDark ? currentLayout.opacityDark : currentLayout.opacityLight;
       material.needsUpdate = true;
       updateColors(isDark);
+      if (prefersReducedMotion) {
+        renderer.render(scene, camera);
+      }
     });
     themeObserver.observe(document.documentElement, {
       attributes: true,
@@ -145,13 +169,24 @@ export default function ThreeHeroCanvas() {
       window.addEventListener("mouseleave", onMouseLeave, { passive: true });
     }
 
-    // Resize handler
+    // Resize handler (dynamically reframes knot across desktop, tablet, and portrait phones)
     const onResize = () => {
       const width = container.clientWidth;
       const height = container.clientHeight;
-      camera.aspect = width / height;
+      currentLayout = getLayoutParams(width, height);
+      camera.aspect = currentLayout.aspect;
+      camera.position.z = currentLayout.cameraZ;
       camera.updateProjectionMatrix();
+
+      particles.position.y = currentLayout.knotY;
+      material.size = currentLayout.pointSize;
+      material.opacity = isDark ? currentLayout.opacityDark : currentLayout.opacityLight;
+      material.needsUpdate = true;
+
       renderer.setSize(width, height);
+      if (prefersReducedMotion) {
+        renderer.render(scene, camera);
+      }
     };
     window.addEventListener("resize", onResize, { passive: true });
 
@@ -250,7 +285,11 @@ export default function ThreeHeroCanvas() {
       renderer.render(scene, camera);
     };
 
-    animate();
+    if (prefersReducedMotion) {
+      renderer.render(scene, camera);
+    } else {
+      animate();
+    }
 
     return () => {
       cancelAnimationFrame(animationFrameId);

@@ -1,90 +1,78 @@
 import React from "react";
 
+export type LogoVariant = "compact" | "full" | "mark";
+
 interface LogoProps {
+  variant?: LogoVariant;
   className?: string;
-  height?: number | string;
-  width?: number | string;
+  markClassName?: string;
 }
 
-export default function Logo({ className = "h-9 w-auto", height = 40, width = 180 }: LogoProps) {
+const MARK_PATHS = (
+  <>
+    {/* Upper speed beam ("Tech") */}
+    <path d="M29 10 H91 L79 30 H24 Z" fill="currentColor" />
+    {/* Solid architectural spine ("Fortesia") */}
+    <path d="M21 42 H43 L31 90 H9 Z" fill="currentColor" />
+    {/* Precision mid blade ("Innovation") */}
+    <path d="M55 42 H82 L70 62 H50 Z" fill="currentColor" />
+  </>
+);
+
+export default function Logo({
+  variant = "compact",
+  className = "",
+  markClassName = "",
+}: LogoProps) {
+  if (variant === "mark") {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 100 100"
+        fill="none"
+        role="img"
+        aria-label="Fortesia Tech Innovation"
+        className={`h-8 w-8 shrink-0 text-zinc-950 transition-colors duration-300 dark:text-white ${className}`}
+      >
+        {MARK_PATHS}
+      </svg>
+    );
+  }
+
+  const isFull = variant === "full";
+
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 520 120"
-      fill="none"
-      className={className}
-      height={height}
-      width={width}
-      aria-label="Fortesia Tech Innovation"
+    <span
+      className={`inline-flex items-center select-none ${
+        isFull ? "gap-3" : "gap-2.5"
+      } ${className}`}
     >
-      <defs>
-        <linearGradient id="fortesiaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#38BDF8" />
-          <stop offset="45%" stopColor="#818CF8" />
-          <stop offset="100%" stopColor="#A855F7" />
-        </linearGradient>
-        <linearGradient id="shieldGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#4F46E5" stopOpacity="0.2" />
-          <stop offset="100%" stopColor="#9333EA" stopOpacity="0.05" />
-        </linearGradient>
-        <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="3" result="blur" />
-          <feComposite in="SourceGraphic" in2="blur" operator="over" />
-        </filter>
-      </defs>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 100 100"
+        fill="none"
+        aria-hidden="true"
+        className={`shrink-0 text-zinc-950 transition-colors duration-300 dark:text-white ${
+          markClassName || (isFull ? "h-9 w-9" : "h-7 w-7")
+        }`}
+      >
+        {MARK_PATHS}
+      </svg>
 
-      {/* Logo Mark (F - Shield & Tech Node) */}
-      <g transform="translate(10, 10)">
-        <polygon
-          points="50,4 92,26 92,74 50,96 8,74 8,26"
-          fill="url(#shieldGrad)"
-          stroke="url(#fortesiaGrad)"
-          strokeWidth="2.5"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M34 26 H72 M34 26 V74 M34 48 H62"
-          stroke="url(#fortesiaGrad)"
-          strokeWidth="5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          filter="url(#neonGlow)"
-        />
-        <circle cx="72" cy="26" r="3.5" fill="#38BDF8" />
-        <circle cx="62" cy="48" r="3.5" fill="#818CF8" />
-        <circle cx="34" cy="74" r="3.5" fill="#A855F7" />
-        <circle cx="50" cy="96" r="2.5" fill="#C084FC" />
-      </g>
-
-      {/* Typography */}
-      <g transform="translate(125, 42)">
-        {/* Brand Primary Name: Dark slate in light mode, Pure white in dark mode */}
-        <text
-          x="0"
-          y="24"
-          fontFamily="'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif"
-          fontSize="34"
-          fontWeight="900"
-          letterSpacing="1.5"
-          className="fill-slate-900 transition-colors duration-300 dark:fill-white"
-        >
+      {isFull ? (
+        <span className="flex flex-col leading-none">
+          <span className="font-sans text-[19px] font-extrabold tracking-[-0.02em] text-zinc-950 transition-colors duration-300 dark:text-white">
+            FORTESIA
+          </span>
+          <span className="mt-1 font-sans text-[10px] font-semibold tracking-[0.26em] text-zinc-500 uppercase transition-colors duration-300 dark:text-zinc-400">
+            TECH INNOVATION
+          </span>
+        </span>
+      ) : (
+        <span className="font-sans text-[17px] font-extrabold tracking-[-0.02em] text-zinc-950 transition-colors duration-300 dark:text-white">
           FORTESIA
-        </text>
-
-        {/* Brand Slogan / Sub-brand */}
-        <text
-          x="2"
-          y="48"
-          fontFamily="'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif"
-          fontSize="12"
-          fontWeight="700"
-          letterSpacing="4.5"
-          fill="url(#fortesiaGrad)"
-        >
-          TECH INNOVATION
-        </text>
-      </g>
-    </svg>
+        </span>
+      )}
+    </span>
   );
 }
-
