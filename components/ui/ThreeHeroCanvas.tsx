@@ -12,8 +12,8 @@ export default function ThreeHeroCanvas() {
 
     const isMobile = window.innerWidth < 768;
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    // Balanced density: crisp nebula around headline on desktop, lighter & cleaner on mobile
-    const particleCount = isMobile ? 4800 : 22000;
+    // Full 360-degree knot density: 9k particles on mobile keep GPU draw crisp without physics overhead
+    const particleCount = isMobile ? 9000 : 22000;
 
     const getIsDark = () => document.documentElement.classList.contains("dark");
 
@@ -21,16 +21,20 @@ export default function ThreeHeroCanvas() {
       const aspect = width / Math.max(1, height);
       const isNarrow = aspect < 1.05;
       const cameraZ = isNarrow
-        ? Math.min(8.4, Math.max(4.8, 5.25 / Math.sqrt(Math.max(0.38, aspect))))
+        ? Math.min(7.6, Math.max(4.8, 4.95 / Math.sqrt(Math.max(0.4, aspect))))
         : 4.8;
+      // Scale world point size with camera distance so particles keep desktop sharpness on mobile
+      const pointSize = isNarrow
+        ? Number((0.0215 * (cameraZ / 4.8)).toFixed(4))
+        : 0.021;
       return {
         aspect,
         isNarrow,
         cameraZ,
-        knotY: isNarrow ? 0.32 : 0,
-        pointSize: isNarrow ? 0.0145 : 0.021,
-        opacityDark: isNarrow ? 0.54 : 0.75,
-        opacityLight: isNarrow ? 0.38 : 0.52,
+        knotY: isNarrow ? 0.3 : 0,
+        pointSize,
+        opacityDark: isNarrow ? 0.78 : 0.75,
+        opacityLight: isNarrow ? 0.58 : 0.52,
       };
     };
 
@@ -84,7 +88,7 @@ export default function ThreeHeroCanvas() {
     geometry.setAttribute("color", colorAttribute);
 
     const updateColors = (isDark: boolean) => {
-      const lightness = isDark ? 0.62 : 0.44;
+      const lightness = isDark ? 0.64 : 0.44;
       for (let i = 0; i < particleCount; i++) {
         scratchColor.setHSL(0.68 + Math.random() * 0.16, 0.85, lightness);
         colors[i * 3] = scratchColor.r;
@@ -94,9 +98,10 @@ export default function ThreeHeroCanvas() {
       colorAttribute.needsUpdate = true;
     };
 
+    const spread = isMobile ? 0.085 : 0.12;
     for (let i = 0; i < particleCount; i++) {
-      const idx = i % knotPositions.count;
-      const spread = 0.12;
+      // Sample evenly across every TorusKnot vertex so the loop has zero seams or gaps
+      const idx = Math.floor((i / particleCount) * knotPositions.count) % knotPositions.count;
       const x = knotPositions.getX(idx) + (Math.random() - 0.5) * spread;
       const y = knotPositions.getY(idx) + (Math.random() - 0.5) * spread;
       const z = knotPositions.getZ(idx) + (Math.random() - 0.5) * spread;

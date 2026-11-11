@@ -57,9 +57,9 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      {/* Subtle Ambient Radial Glow */}
+      {/* Subtle Ambient Radial Glow (kept behind the -z-10 3D canvas so particles stay crisp) */}
       <div
-        className="pointer-events-none absolute top-12 left-1/2 -z-10 h-[500px] w-[750px] -translate-x-1/2 rounded-full bg-indigo-500/10 blur-[120px] dark:bg-purple-600/20"
+        className="pointer-events-none absolute top-12 left-1/2 -z-20 h-[500px] w-[750px] -translate-x-1/2 rounded-full bg-indigo-500/10 blur-[120px] dark:bg-purple-600/20"
         aria-hidden="true"
       />
 

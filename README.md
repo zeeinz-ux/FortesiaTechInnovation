@@ -1,69 +1,104 @@
-# Fortesia Tech Innovation — Official Website
+<p>
+  <a href="https://fortesiatechinnovation.web.id">
+    <img src="./public/favicon.svg" alt="Fortesia Tech Innovation" width="44" height="44" />
+  </a>
+</p>
 
-Website resmi **Fortesia Tech Innovation**, software house & partner rekayasa digital di Indonesia (pembuatan website, high-converting landing page, custom web app, aplikasi mobile Android/iOS, dan optimasi SEO).
+# Fortesia Tech Innovation
 
-Dibangun dengan **Next.js 15 (App Router)**, **React 19**, **TypeScript**, dan **Tailwind CSS v4**, siap di-*deploy* penuh di **Vercel** (termasuk route server untuk asisten AI).
+Codebase website utama [**fortesiatechinnovation.web.id**](https://fortesiatechinnovation.web.id) — landing page, showcase kapabilitas, dan asisten konsultasi **ForteAI** untuk Fortesia Tech Innovation.
 
----
+`Next.js 15` · `React 19` · `TypeScript` · `Tailwind CSS v4` · `Three.js` · `Gemini API`
 
-## Fitur Utama
+[Website](https://fortesiatechinnovation.web.id) · [WhatsApp](https://wa.me/6285129792711) · [Email](mailto:fortesiatechinnovation@gmail.com)
 
-- **ForteAI Assistant (`ForteAIAssistant` + `ForteAIChatPanel`):**
-  - Maskot interaktif yang berpatroli acak secara halus di dalam area layar aman, dapat di-drag langsung dengan kursor/sentuhan, serta menyapa secara kontekstual sesuai section.
-  - Kolom chat dengan arsitektur hemat token: 4 kartu *Quick Action* (0 token) + pencocokan topik lokal di `lib/forteai-knowledge.ts`, lalu memanggil **Gemini API Free Tier** via `app/api/assistant/route.ts` (default `gemini-3.5-flash-lite`) dengan pembatasan topik khusus layanan Fortesia, rate-limit per IP, dan fallback lokal otomatis bila kuota habis atau API key belum diisi.
-- **Hero 3D Interaktif (`ThreeHeroCanvas`):**
-  - Visualisasi partikel TorusKnot berbasis Three.js dengan *cursor repel* di desktop serta penskalaan kamera dan kepadatan partikel otomatis agar tetap bersih di layar HP.
-- **Identitas Visual Monokrom & Adaptive Theme:**
-  - Logomark geometris `F` Pure Monochrome (`components/ui/Logo.tsx` & `public/favicon.svg`), adaptif otomatis antara Light Mode dan Dark Mode via skrip anti-flash di `app/layout.tsx` (`prefers-color-scheme` + `sessionStorage.theme_override`).
-- **SEO & Jalur Konversi WhatsApp:**
-  - Metadata OpenGraph/Twitter, Schema.org JSON-LD (`Organization`, `ProfessionalService`, `FAQPage`), `public/sitemap.xml`, dan `public/robots.txt`.
-  - Pendekatan konsultasi tanpa daftar harga kaku; seluruh CTA mengarah ke WhatsApp **+62 851-2979-2711**.
-- **Performa & Responsivitas Mobile:**
-  - Font lokal ter-vendor di `app/fonts/` (`Inter` & `Playfair Display`), ikon teknologi self-hosted di `public/icons/tech/`, penyesuaian tata letak saat keyboard virtual HP terbuka (`visualViewport`), serta selalu kembali ke bagian atas halaman saat browser di-refresh.
+## Stack
 
----
+| Layer | Implementasi |
+| :--- | :--- |
+| Framework | Next.js 15 (App Router), React 19, TypeScript strict |
+| Styling & Font | Tailwind CSS v4, variabel font lokal `Inter` & `Playfair Display` (`app/fonts/`) |
+| Visual 3D | Three.js particle TorusKnot dengan camera scaling adaptif (`ThreeHeroCanvas`) |
+| Asisten AI | Route handler `/api/assistant` → Gemini API (`gemini-3.5-flash-lite`) + fallback lokal |
+| SEO & Aset | Schema.org JSON-LD (`Organization`, `ProfessionalService`, `FAQPage`), SVG self-hosted |
 
-## Menjalankan Proyek di Lokal
+## Arsitektur ForteAI
 
-### 1. Install Dependensi
+Chat diproses bertingkat agar hemat token dan tetap aktif meski API key belum diset:
+
+| Tahap | Penanganan | Sumber |
+| :--- | :--- | :--- |
+| 1. Quick Action | Kartu pertanyaan cepat dijawab langsung di client (0 token) | `components/ui/ForteAIChatPanel.tsx` |
+| 2. Local Knowledge | Guardrail topik & FAQ standar diproses lokal di server | `lib/forteai-knowledge.ts` |
+| 3. Gemini Free Tier | Pertanyaan terbuka diteruskan ke Gemini API (limit 12/mnt, 45/jam per IP) dengan fallback lokal otomatis | `app/api/assistant/route.ts` |
+
+## Struktur Proyek
+
+```text
+app/
+├── api/assistant/route.ts   # Proxy Gemini API, topic guardrail, IP rate-limiter
+├── fonts/                   # Variable WOFF2 (Inter & Playfair Display)
+├── globals.css              # Token tema light/dark (.dark) & animasi
+├── layout.tsx               # Metadata SEO, anti-flash theme init, scroll-reset saat reload
+└── page.tsx                 # Urutan section halaman
+components/
+├── sections/                # Header, Hero, ServicesGrid, CapabilityShowcase, FAQ, Footer
+├── seo/JsonLd.tsx           # Structured data JSON-LD
+└── ui/                      # Logo, ThreeHeroCanvas, ForteAIAssistant, ForteAIChatPanel, ThemeToggle
+lib/
+└── forteai-knowledge.ts     # System prompt & basis pengetahuan layanan
+public/
+├── icons/tech/              # Ikon teknologi SVG self-hosted (cache 1 tahun)
+├── images/                  # Pose maskot ForteAI (idle, glide, fly)
+├── favicon.svg              # Squircle monokrom F
+├── logo.svg                 # Lockup brand monokrom
+├── robots.txt
+└── sitemap.xml
+scripts/
+└── fetch-tech-icons.mjs     # Sinkronisasi ikon SVG ke public/icons/tech/
+```
+
+## Menjalankan di Lokal
+
 ```bash
 npm install
+npm run dev          # http://localhost:3000
+npx tsc --noEmit     # Verifikasi tipe TypeScript
 ```
 
-### 2. Konfigurasi Environment (Opsional untuk Gemini AI)
-Salin `.env.example` menjadi `.env` (atau `.env.local`), lalu masukkan API key gratis dari Google AI Studio:
+Salin `.env.example` ke `.env.local` jika ingin menguji integrasi Gemini secara langsung:
+
 ```env
-GEMINI_API_KEY=isi_api_key_gemini_anda
+GEMINI_API_KEY=
 GEMINI_MODEL=gemini-3.5-flash-lite
 ```
-> **Catatan:** File `.env` / `.env*.local` otomatis diabaikan oleh `.gitignore`. Tanpa `GEMINI_API_KEY`, asisten ForteAI tetap berjalan normal menggunakan basis pengetahuan lokal.
 
-### 3. Jalankan Development Server
-```bash
-npm run dev
-```
-Buka [http://localhost:3000](http://localhost:3000).
+Tanpa `GEMINI_API_KEY`, situs dan panel chat ForteAI tetap berfungsi menggunakan balasan fallback lokal.
 
-### 4. Verifikasi TypeScript
-```bash
-npx tsc --noEmit
-```
+## Environment Variables
 
----
+| Variabel | Wajib | Default | Keterangan |
+| :--- | :--- | :--- | :--- |
+| `GEMINI_API_KEY` | Tidak | `—` | API key Google AI Studio untuk `/api/assistant` |
+| `GEMINI_MODEL` | Tidak | `gemini-3.5-flash-lite` | Override model Gemini |
+| `GITHUB_PAGES` | Tidak | `—` | Set `"true"` hanya untuk static export ke `./out` |
 
 ## Deployment
 
-### Vercel (Direkomendasikan — Produksi Penuh)
-1. Push repository ke GitHub (`master`).
-2. Import proyek di dashboard **Vercel**.
-3. Tambahkan **Environment Variables** pada Project Settings Vercel:
-   - `GEMINI_API_KEY`
-   - `GEMINI_MODEL` (opsional, default `gemini-3.5-flash-lite`)
-4. Deploy — route server `/api/assistant` dan seluruh halaman berjalan penuh secara otomatis.
+### Vercel
 
-### Static Export / GitHub Pages (Manual Opsional)
-Build default (`npm run build`) menghasilkan server build Next.js standar (`.next`). Static export ke `./out` hanya aktif apabila `GITHUB_PAGES=true` diset:
+Direkomendasikan untuk produksi penuh karena mendukung route server `/api/assistant` dan header cache aset:
+
+1. Pastikan **Production Branch** pada **Settings → Git** di Vercel diarahkan ke branch utama (`master` atau `main`).
+2. Tambahkan `GEMINI_API_KEY` (dan opsional `GEMINI_MODEL`) di **Settings → Environment Variables**.
+3. Push ke branch tersebut; Vercel menjalankan `npm run build` secara otomatis.
+
+### Static Export / GitHub Pages
+
+Build default (`npm run build`) menghasilkan server build Next.js di `.next`. Static export ke `./out` hanya aktif ketika `GITHUB_PAGES=true`:
+
 ```powershell
 $env:GITHUB_PAGES="true"; npm run build
 ```
-Workflow `.github/workflows/deploy.yml` diset ke mode manual (`workflow_dispatch`) agar push ke GitHub tidak memicu build GitHub Pages yang bentrok dengan route API. *(Dalam mode static export murni, `/api/assistant` tidak berjalan sehingga ForteAI memakai balasan lokal.)*
+
+Workflow `.github/workflows/deploy.yml` dikonfigurasi manual (`workflow_dispatch`) agar push rutin tidak memicu static export. Pada mode static export murni, `/api/assistant` tidak berjalan sehingga ForteAI otomatis memakai fallback lokal.
