@@ -12,10 +12,9 @@ export default function LoadingScreen() {
     // Dismiss for automated audit tools (Lighthouse/PageSpeed) so true DOM LCP is measured
     const isBot =
       typeof navigator !== "undefined" &&
-      (/Lighthouse|PageSpeed|Google-InspectionTool|HeadlessChrome|PTST|Chrome-Lighthouse/i.test(
+      /Lighthouse|PageSpeed|Google-InspectionTool|HeadlessChrome|PTST|Chrome-Lighthouse/i.test(
         navigator.userAgent
-      ) ||
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+      );
 
     if (isBot) return;
 

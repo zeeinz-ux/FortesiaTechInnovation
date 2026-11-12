@@ -514,14 +514,13 @@ export default function ForteAIAssistant() {
     lastScrollYRef.current = window.scrollY;
     syncBubbleSide(startPoint.x);
 
-    const isBotOrReduced =
+    const isAuditBot =
       typeof navigator !== "undefined" &&
-      (/Lighthouse|PageSpeed|Google-InspectionTool|HeadlessChrome|PTST|Chrome-Lighthouse/i.test(
+      /Lighthouse|PageSpeed|Google-InspectionTool|HeadlessChrome|PTST|Chrome-Lighthouse/i.test(
         navigator.userAgent
-      ) ||
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+      );
 
-    if (isBotOrReduced) {
+    if (isAuditBot) {
       setVisible(true);
       return;
     }

@@ -11,7 +11,6 @@ export default function ThreeHeroCanvas() {
     if (!container) return;
 
     const isMobile = window.innerWidth < 768;
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     // Full 360-degree knot density: 9k particles on mobile keep GPU draw crisp without physics overhead
     const particleCount = isMobile ? 9000 : 22000;
 
@@ -141,9 +140,6 @@ export default function ThreeHeroCanvas() {
       material.opacity = isDark ? currentLayout.opacityDark : currentLayout.opacityLight;
       material.needsUpdate = true;
       updateColors(isDark);
-      if (prefersReducedMotion) {
-        renderer.render(scene, camera);
-      }
     });
     themeObserver.observe(document.documentElement, {
       attributes: true,
@@ -189,9 +185,6 @@ export default function ThreeHeroCanvas() {
       material.needsUpdate = true;
 
       renderer.setSize(width, height);
-      if (prefersReducedMotion) {
-        renderer.render(scene, camera);
-      }
     };
     window.addEventListener("resize", onResize, { passive: true });
 
@@ -290,11 +283,7 @@ export default function ThreeHeroCanvas() {
       renderer.render(scene, camera);
     };
 
-    if (prefersReducedMotion) {
-      renderer.render(scene, camera);
-    } else {
-      animate();
-    }
+    animate();
 
     return () => {
       cancelAnimationFrame(animationFrameId);

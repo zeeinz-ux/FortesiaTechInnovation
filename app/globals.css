@@ -1085,13 +1085,3 @@ body {
   animation: forteai-wing-flap-b 0.9s ease-in-out infinite;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .forteai-bob,
-  .forteai-eye-blink,
-  .forteai-orb-spin,
-  .forteai-typing-dot,
-  .forteai-wing-left,
-  .forteai-wing-right {
-    animation: none !important;
-  }
-}
