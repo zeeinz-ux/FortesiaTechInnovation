@@ -280,11 +280,10 @@ function CyberFairyWings({ pose }: { pose: MascotPose }) {
     <svg
       viewBox="0 0 140 110"
       aria-hidden="true"
-      className={`pointer-events-none absolute -z-10 transition-all duration-500 ${
-        activeFlight
-          ? "-top-1 -left-5 w-[132%] h-[92%] opacity-85 scale-100"
-          : "top-2 -left-3 w-[118%] h-[78%] opacity-45 scale-90"
-      }`}
+      className={`pointer-events-none absolute -z-10 transition-all duration-500 ${activeFlight
+        ? "-top-1 -left-5 w-[132%] h-[92%] opacity-85 scale-100"
+        : "top-2 -left-3 w-[118%] h-[78%] opacity-45 scale-90"
+        }`}
     >
       <defs>
         <linearGradient id="forteai-wing-grad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -1061,21 +1060,19 @@ export default function ForteAIAssistant() {
         onMouseLeave={() => {
           isHoveringRef.current = false;
         }}
-        className={`fixed top-0 left-0 z-40 select-none transition-opacity duration-300 ${
-          !visible
-            ? "opacity-0 pointer-events-none"
-            : chatOpen
-              ? "max-sm:opacity-0 max-sm:pointer-events-none opacity-100"
-              : "opacity-100"
-        }`}
+        className={`fixed top-0 left-0 z-40 select-none transition-opacity duration-300 ${!visible
+          ? "opacity-0 pointer-events-none"
+          : chatOpen
+            ? "max-sm:opacity-0 max-sm:pointer-events-none opacity-100"
+            : "opacity-100"
+          }`}
         style={{ willChange: "transform" }}
       >
         {/* Contextual Speech Bubble */}
         {!chatOpen && !bubbleDismissed && (
           <div
-            className={`absolute bottom-[calc(100%+4px)] w-max max-w-[196px] sm:max-w-[220px] ${
-              bubbleOnLeft ? "right-0" : "left-0"
-            }`}
+            className={`absolute bottom-[calc(100%+4px)] w-max max-w-[196px] sm:max-w-[220px] ${bubbleOnLeft ? "right-0" : "left-0"
+              }`}
           >
             <div className="relative flex items-start gap-1.5 rounded-2xl border border-indigo-200/90 bg-white/95 px-3 py-2 text-[11px] font-semibold leading-snug text-slate-800 shadow-lg backdrop-blur-md dark:border-purple-400/25 dark:bg-[#131226]/95 dark:text-slate-100">
               <button
@@ -1126,17 +1123,15 @@ export default function ForteAIAssistant() {
 
           {/* Floating body wrapper */}
           <div
-            className={`forteai-bob relative h-full w-full transition-transform duration-300 group-hover:scale-105 ${
-              flipSprite ? "-scale-x-100" : ""
-            }`}
+            className={`forteai-bob relative h-full w-full transition-transform duration-300 group-hover:scale-105 ${flipSprite ? "-scale-x-100" : ""
+              }`}
           >
             <CyberFairyWings pose={pose} />
 
             {/* Pose 1: Front Greeting Pose (with live blinking + cursor-tracking cyan eyes) */}
             <div
-              className={`absolute inset-0 transition-opacity duration-300 ${
-                pose === "greet" ? "opacity-100" : "opacity-0 pointer-events-none"
-              }`}
+              className={`absolute inset-0 transition-opacity duration-300 ${pose === "greet" ? "opacity-100" : "opacity-0 pointer-events-none"
+                }`}
             >
               <img
                 src="/images/forteai-mascot.png"
@@ -1172,9 +1167,8 @@ export default function ForteAIAssistant() {
               width={282}
               height={340}
               draggable={false}
-              className={`pointer-events-none absolute inset-0 h-full w-full object-contain drop-shadow-[0_10px_18px_rgba(67,56,202,0.28)] transition-opacity duration-300 dark:drop-shadow-[0_12px_22px_rgba(56,189,248,0.24)] ${
-                pose === "fly" ? "opacity-100" : "opacity-0"
-              }`}
+              className={`pointer-events-none absolute inset-0 h-full w-full object-contain drop-shadow-[0_10px_18px_rgba(67,56,202,0.28)] transition-opacity duration-300 dark:drop-shadow-[0_12px_22px_rgba(56,189,248,0.24)] ${pose === "fly" ? "opacity-100" : "opacity-0"
+                }`}
             />
 
             {/* Pose 3: Dreamy Arched Fairy Glide Pose */}
@@ -1185,9 +1179,8 @@ export default function ForteAIAssistant() {
               width={237}
               height={340}
               draggable={false}
-              className={`pointer-events-none absolute inset-0 h-full w-full object-contain drop-shadow-[0_10px_18px_rgba(67,56,202,0.28)] transition-opacity duration-300 dark:drop-shadow-[0_12px_22px_rgba(56,189,248,0.24)] ${
-                pose === "glide" ? "opacity-100" : "opacity-0"
-              }`}
+              className={`pointer-events-none absolute inset-0 h-full w-full object-contain drop-shadow-[0_10px_18px_rgba(67,56,202,0.28)] transition-opacity duration-300 dark:drop-shadow-[0_12px_22px_rgba(56,189,248,0.24)] ${pose === "glide" ? "opacity-100" : "opacity-0"
+                }`}
             />
           </div>
         </button>

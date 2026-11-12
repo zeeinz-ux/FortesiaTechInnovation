@@ -37,3 +37,7 @@ next-env.d.ts
 BLUEPRINT_RENCANA_LANDING_PAGE.md
 BLUEPRINT_FORTEAI_ASSISTANT.md
 BLUEPRINT_LOGO_BRANDING.md
+
+# Local Brand Asset Exports
+/public/brand/
+/public/brand.zip
